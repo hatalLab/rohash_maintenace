@@ -1,0 +1,26 @@
+{% extends "base.jin" %}
+
+
+{% block main %}
+    <h1>Flight No°{{ flight.id }} ({{ flight.team_name }})</h1>
+    <p><b>Flight start:</b> {{ flight.human_start_time }}</p>
+        {% if not flight.is_alive() %}
+    <p><b>Flight end:</b> {{ flight.human_end_time }}</p>
+    <p><b>Total flight time:</b> {{ flight.human_flight_time }} </p>
+    {% endif %}
+    <p><b>{{ flight.components|length }} components:</b></p>
+    <ol>
+        {% for comp in flight.components %}
+        <li><a href="{{ url_for('component_details', comp_id=comp.id) }}"> Component No°{{ comp.id }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

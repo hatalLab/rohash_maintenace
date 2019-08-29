@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title dir="rtl">סורק ברקודים</title>
+    <div id="header-container"></div>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    {% block scripts %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <div class="navbar">
+        <img class="logo" src="{{ url_for('static', filename='images/hatal.jpg') }}" style="width:100px;height:100px"; />
+        <ol>
+            <a href="{{ url_for('new_flight') }}"><li>Start flight</li></a>
+            <a href="{{ url_for('end_flight') }}"><li>End flight</li></a>
+            <a href="{{ url_for('scan') }}"><li>Scan component</li></a>
+            <a href="{{ url_for('flights_history') }}"><li>Flights</li></a>
+            {% if flight_session.alive() %}
+                <a href="{{ url_for('flight_details', flight_id=flight_session.flight_id) }}">Flight: {{ flight_session. flight_id }} ({{ flight_session.get_team_name() }})</a>
+            {% else %}
+                <p>No flight running</p>
+            {% endif %}
+        </ol>
+    </div>
+
+    <div class="main_container">
+        {% block main %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.jin" %}
+
+
+{% block main %}
+    <h1>Component No°{{ component.id }} </h1>
+    <h2>Total usage time: {{ component.human_total_used_time }} </h2>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

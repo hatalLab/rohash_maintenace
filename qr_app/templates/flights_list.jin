@@ -1,0 +1,35 @@
+{% extends "base.jin" %}
+
+
+{% block main %}
+    <h1>Flights:</h1>
+    <ol class="flights_list">
+        {% for flight, is_active in flights.items() %}
+        <li>
+            <a href="{{ url_for('flight_details', flight_id=flight.id) }}">Flight No°{{ flight.id }}</a>
+            {% if is_active %}
+                <b>In air</b>
+                <img src="{{ url_for('static', filename='images/green_checkmark.png') }}" width="20px" height="15px" />
+                <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=flight.id, callback=url_for('flights_history')) }}">
+                    <input type="hidden" name="flight_id" value="{{ flight.id }}">
+                    <input type="hidden" name="callback" value="{{ url_for('flights_history') }}">
+                    <input id="submit" name="submit" type="submit" value="Terminate">
+                </form>
+            {% else %}
+                <b>Done</b>
+                 <img src="{{ url_for('static', filename='images/red_checkmark.png' ) }}" width="20px" height="15px" />
+                <b>{{ flight.human_flight_time }}</b>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

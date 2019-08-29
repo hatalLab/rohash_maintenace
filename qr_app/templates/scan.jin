@@ -1,0 +1,77 @@
+{% extends "base.jin" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='javascript/instascan.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block main %}
+<div class="header">
+    <div class="cam">
+
+        <div class="canvases_container">
+            <div class="video_canvas">
+                <img class="loading" src="{{ url_for('static', filename='images/loading.gif') }}"/>
+                <video id="preview"></video>
+            </div>
+            <div>
+                <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=flight.id, callback=url_for('homepage')) }}">
+                    <input type="hidden" name="flight_id" value="{{ flight_session.flight_id }}">
+                    <input type="hidden" name="callback" value="{{ url_for('homepage') }}">
+                    <input id="submit" name="submit" type="submit" value="Finish">
+                </form>
+            </div>
+            <div class="answer_canvas">
+                <p class="answer"></p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $(".loading").hide();
+            $(".submit").hide();
+            let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+
+            scanner.addListener('scan', function (content) {
+                $(".submit").show();
+                let encoded=btoa(content);
+                $("#preview").toggle();     //toggle camera
+                $(".loading").toggle();     //load loading gif instead
+                let xhttp=new XMLHttpRequest();
+                xhttp.open("GET", "/api-qr-process/"+encoded, true);
+                xhttp.send();
+                xhttp.onreadystatechange=function(){
+                    if(this.readyState==4){
+                    var resp = JSON.parse(this.responseText);
+
+                    $(".loading").toggle();    //toggle loading gif
+                    $(".answer").text(resp['text']);
+                    $("#preview").toggle();    //toggle camera
+                    if (!this.status==200){
+                        alert("Failed to read qr code");
+                        }
+                     }
+                 }
+          });
+
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+
+
+
+        </script>
+
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+
+    {% endblock %}
+

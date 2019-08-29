@@ -1,0 +1,15 @@
+{% extends "base.jin" %}
+
+
+{% block main %}
+
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
