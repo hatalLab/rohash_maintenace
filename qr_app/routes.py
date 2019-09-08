@@ -34,7 +34,7 @@ def return_callback(default=None):
 
 @app.route('/')
 def homepage():
-    return flask.render_template("homepage.jin")
+    return flask.redirect(flask.url_for("flights_history"))
 
 @app.route('/new-flight',  methods=("GET", "POST"))
 def new_flight():
@@ -43,7 +43,7 @@ def new_flight():
         new_flight = models.Flight(team_name=form.team_name.data)
         new_flight.add_to_db()
         set_flight(new_flight.id)
-        return flask.redirect(flask.url_for('scan'))
+        return flask.redirect(flask.url_for('scan', flight=new_flight))
 
     return flask.render_template("new_flight.jin", form=form)
 
