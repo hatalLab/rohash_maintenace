@@ -2,13 +2,17 @@ import flask_wtf
 from qr_app import models
 import wtforms
 from wtforms import validators as val
+from sqlalchemy.inspection import inspect
 
 class NewFlight(flask_wtf.FlaskForm):
 
-    team_name = wtforms.StringField("Team name", validators=(val.DataRequired(), ))
-
+    soldier1        = wtforms.IntegerField("Commander id")
+    soldier2        = wtforms.IntegerField("Pilot id")
+    coordinates     = wtforms.SelectField("Departure waypoint", choices=[])
     submit          = wtforms.SubmitField("Add flight")
 
+    def update_coordinates(self):
+        self.coordinates.choices = [((coord.x, coord.y), coord.to_str()) for coord in models.Coordinates.query.all()]
 
 class EndFlight(flask_wtf.FlaskForm):
 
