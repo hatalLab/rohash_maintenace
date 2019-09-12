@@ -43,27 +43,13 @@ class  Flight(BasicModel, db.Model):
 
     def flight_time(self):
         """
+
         :return:  Flight time in seconds
         """
         if self.alive:
             return None
         delta = (self.end_time - self.start_time).total_seconds()
         return delta
-
-    def components_types_check(self):
-        types = Component.types_dict()
-        flight_components = [c.type_code for c in self.components]
-        check_list = {}
-        for code in types.keys():
-            if code in flight_components:
-                check_list[code] = True
-            else:
-                check_list[code] = False
-        return check_list
-
-    @staticmethod
-    def typecode2typename(code):
-        return Component.typecode2typename(code)
 
     @property
     def human_flight_time(self):
@@ -92,8 +78,7 @@ class  Flight(BasicModel, db.Model):
 
 class Component(BasicModel, db.Model):
 
-    id                = db.Column(db.Integer, primary_key=True)
-    type_code = db.Column(db.String(64))
+    id = db.Column(db.Integer, primary_key=True)
     # flights --> list of Flight object associated
 
     def total_used_time(self):
@@ -113,34 +98,4 @@ class Component(BasicModel, db.Model):
         if not q:
             return False
         return q
-
-    @classmethod
-    def types_dict(cls):
-        return {
-            'RW':"Right wing",
-            'SW':"Small wing",
-            'T':"Tail",
-            'H':"Head",
-            'E':"Elastic",
-            'M':"Motor"
-        } # ALWAYS UPPERCASE
-
-    @classmethod
-    def typecode2typename(cls, code):
-        code = code.upper()
-        if code not in cls.types_dict():
-            return False
-        return cls.types_dict()[code]
-
-    def add_to_db(self):
-        self.type_code = self.type_code.upper()
-        db.session.add(self)
-        try:
-            db.session.commit()
-            print("Added flight No {} to db".format(self.id))
-        except:
-            db.session.rollback()
-            return False
-        return True
-
 
