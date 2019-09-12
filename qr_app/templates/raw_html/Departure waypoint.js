@@ -8,7 +8,7 @@ function filterFunction() {
     let input, filter, a, i, div, txtValue, count = 0;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    div = document.getElementById("dropdown-contentA");
+    div = document.getElementById("dropdown-locations");
     a = div.getElementsByTagName("a");
     count = a.length;
     for (i = 0; i < a.length; i++) {
@@ -39,3 +39,8 @@ input.addEventListener('keyup', () => addLocation());
 
 
 $("#Add").hide();
+
+$(".location").click(function(event){
+    console.log(event.target.tagName);
+    
+  });
