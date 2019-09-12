@@ -4,8 +4,6 @@ import wtforms
 from wtforms import validators as val
 from sqlalchemy.inspection import inspect
 
-class DropdownField(wtforms.Field):
-
 
 
 class NewFlight(flask_wtf.FlaskForm):

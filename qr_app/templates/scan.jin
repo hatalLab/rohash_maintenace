@@ -30,9 +30,9 @@
             <ul>
                 {% for code, check in curr_flight.components_types_check().items() %}
                     {% if check %}
-                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px" /><p>{{ curr_flight.typecode2typename(code) }}</p>
+                        <p><img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px" />{{ curr_flight.typecode2typename(code) }}</p>
                     {% else %}
-                        <img src="{{ url_for('static', filename='images/red_checkmark.png' ) }}" width="20px" height="15px" /><p>{{ curr_flight.typecode2typename(code) }}</p>
+                        <p><img src="{{ url_for('static', filename='images/red_checkmark.png' ) }}" width="20px" height="15px" />{{ curr_flight.typecode2typename(code) }}</p>
                     {% endif %}
                 {% endfor %}
             </ujl>
