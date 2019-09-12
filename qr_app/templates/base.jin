@@ -4,6 +4,7 @@
     <title dir="rtl">סורק ברקודים</title>
     <div id="header-container"></div>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="stylesheet" href="static/css/aviStyle.css"/>
     {% block scripts %}
     {% endblock %}
 </head>
@@ -13,12 +14,19 @@
     <div class="navbar">
         <img class="logo" src="{{ url_for('static', filename='images/hatal.jpg') }}" style="width:100px;height:100px"; />
         <ol>
-            <a href="{{ url_for('new_flight') }}"><li>Start flight</li></a>
-            <a href="{{ url_for('end_flight') }}"><li>End flight</li></a>
-            <a href="{{ url_for('scan') }}"><li>Scan component</li></a>
-            <a href="{{ url_for('flights_history') }}"><li>Flights</li></a>
+            <li class="menu-item" ><a  href="{{ url_for('new_flight') }}">Start flight</a></li>
+            <li class="menu-item" ><a  href="{{ url_for('end_flight') }}">End flight</a></li>
+            <li class="menu-item" ><a  href="{{ url_for('scan') }}">Scan component</a></li>
+            <li class="menu-item" ><a  href="{{ url_for('flights_history') }}">Flights</a></li>
             {% if flight_session.alive() %}
-                <a href="{{ url_for('flight_details', flight_id=flight_session.flight_id) }}">Flight: {{ flight_session. flight_id }} ({{ flight_session.get_team_name() }})</a>
+            <li class="menu-item" >
+                <a href="{{ url_for('flight_details', flight_id=flight_session.flight_id) }}">Flight: {{ flight_session. flight_id }} ({{ flight_session.get_team_name() }}</a>
+                <ol class="sub-menu">
+                    {% for component in flight_session.get_current_flight().components %}
+                        <li class="menu-item"><p>Component No°{{ component.id }}</p></li>
+                    {% endfor %}
+                </ol>
+            </li>
             {% else %}
                 <p>No flight running</p>
             {% endif %}

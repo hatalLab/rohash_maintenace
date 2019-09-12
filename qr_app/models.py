@@ -19,14 +19,23 @@ flights_to_components = db.Table('flights_to_comps',
                                  db.Column('comp_id', db.Integer, db.ForeignKey('component.id'), primary_key=True)
                                  )
 
+flights_to_soldiers = db.Table('flights_to_soldiers',
+                               db.Column('flight_id', db.Integer, db.ForeignKey('flight.id'), primary_key=True),
+                               db.Column('soldier_id', db.Integer, db.ForeignKey('soldier.id'), primary_key=True)
+                                )
+
 class  Flight(BasicModel, db.Model):
 
-    id                     = db.Column(db.Integer, primary_key=True)
-    team_name   = db.Column(db.String(64))
-    alive                = db.Column(db.Boolean, default=True)
-    start_time      = db.Column(db.DateTime, default=datetime.now())
-    end_time        = db.Column(db.DateTime)
+    id          = db.Column(db.Integer, primary_key=True)
+    alive       = db.Column(db.Boolean, default=True)
+    start_time  = db.Column(db.DateTime, default=datetime.now())
+    end_time    = db.Column(db.DateTime)
+
+    start_coords_id = db.Column(db.Integer, db.ForeignKey('coordinates.id'))
+    end_coords_id = db.Column(db.Integer, db.ForeignKey('coordinates.id'))
+
     components  = db.relationship("Component", secondary=flights_to_components, lazy='subquery', backref=db.backref('flights',lazy=True))
+    soldiers    = db.relationship("Soldier", secondary=flights_to_soldiers, lazy='subquery', backref=db.backref('flights', lazy=True))
 
     def add_component(self, comp):
         if comp.id not in [c.id for c in self.components]:
@@ -90,6 +99,23 @@ class  Flight(BasicModel, db.Model):
         db.session.commit()
         return True
 
+
+class Soldier(BasicModel,db.Model):
+
+    id   = db.Column(db.Integer(), primary_key=True)
+    role = db.Column(db.String(64))
+    # flights --> list of Flight objects associated
+
+
+
+class Coordinates(BasicModel, db.Model):
+    id                   = db.Column(db.Float, primary_key=True) 
+    x                    = db.Column(db.Float)
+    y                    = db.Column(db.Float) 
+    flight               = db.Column(db.Integer, db.ForeignKey('flight.id'))
+
+    def to_str(self):
+        return "{}-{}".format(self.x,self.y)
 class Component(BasicModel, db.Model):
 
     id                = db.Column(db.Integer, primary_key=True)

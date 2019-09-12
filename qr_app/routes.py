@@ -30,20 +30,30 @@ def return_callback(default=None):
         return wrapper
     return decorator
 
+
 ##### ROUTES #####
 
 @app.route('/')
 def homepage():
-    return flask.render_template("homepage.jin")
+    return flask.redirect(flask.url_for("flights_history"))
 
 @app.route('/new-flight',  methods=("GET", "POST"))
 def new_flight():
     form = forms.NewFlight()
     if form.validate_on_submit():
+        commander   = models.Soldier(id=form.soldier1.data, role="commander")
+        pilot       = models.Soldier(id=form.soldier2.data, role="pilot")
+        coords_data = form.coordinates.data
+        coordinates = models.Coordinates(x=coords_data[0], y=coords_data[1])
         new_flight = models.Flight(team_name=form.team_name.data)
+
+        new_flight.soldiers.append(commander)
+        new_flight.soldiers.append(pilot)
+        coordinates.flights.append(new_flight)
+
         new_flight.add_to_db()
         set_flight(new_flight.id)
-        return flask.redirect(flask.url_for('scan'))
+        return flask.redirect(flask.url_for('scan', flight=new_flight))
 
     return flask.render_template("new_flight.jin", form=form)
 
