@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title dir="rtl">סורק ברקודים</title>
+    <script type="text/javascript" src="./instascan.min.js"></script>
+    <div id="header-container"></div>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="titles">
+      <img class="logo" src="./hatall.png" style="width:100px;height:100px"; />
+    </div>
+      <div class="header">
+    <video id="preview"></video>
+    <script type="text/javascript">
+
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+
+      scanner.addListener('scan', function (content) {
+        let encoded=btoa(content);
+        window.location.href = '/qr-process/'+ encoded; 
+      });
+
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+
+    </script>
+      <script src="./addition.js"></script>
+      </div>
+  </body>
+</html>
