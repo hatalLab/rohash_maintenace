@@ -5,8 +5,8 @@
     <title dir="rtl">סורק ברקודים</title>
     <div id="header-container"></div>
     <link rel="stylesheet" href="static/css/style.css"/>
-    
-
+    <link rel="stylesheet" href="static/css/aviStyle.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <div class="navbar">
         <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px"; />
@@ -37,8 +37,26 @@
     </p>
 
     <p>
-        <label for="coordinates">Departure waypoint</label>
-        <select id="coordinates" name="coordinates"></select>
+        <label for="coordinates">
+                <div class="dropdown">
+                        <button type="button" onclick="myFunction()" class="dropbtn"> Departure waypoint &nbsp;  &#9660</button>
+                        <div id="myDropdown" class="dropdown-content">
+                
+                            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                            <a href="#Add" id="Add">Add: </a>
+                            <div id="dropdown-contentA">
+                                <a href="#about">About</a>
+                                <a href="#base">Base</a>
+                                <a href="#blog">Blog</a>
+                                <a href="#contact">Contact</a>
+                                <a href="#custom">Custom</a>
+                                <a href="#support">Support</a>
+                                <a href="#tools">Tools</a>
+                            </div>
+                        </div>
+                    </div>
+        </label>
+        
     </p>
 
     <p>
@@ -48,5 +66,6 @@
 </form>
 
     </div>
+    <script src="./Departure waypoint.js"></script>
 </body>
 </html>
