@@ -35,28 +35,31 @@
         <label for="soldier2">Pilot id</label>
         <input id="soldier2" name="soldier2" type="text" value="">
     </p>
+<select hidden id="selector"><option id="selected" selected></option></select>
+    <p class="departure-waypoint">
+        <label for="coordinates"> Departure waypoint: </label>
+        <div class="dropdown">
+                <button type="button" onclick="myFunction()" class="dropbtn"><p id="selection"></p> &nbsp;  &#9660</button>
+                <div id="myDropdown" class="dropdown-content">
+                        <p id="selected-content"></p>
+                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
 
-    <p>
-        <label for="coordinates">
-                <div class="dropdown">
-                        <button type="button" onclick="myFunction()" class="dropbtn"> Departure waypoint &nbsp;  &#9660</button>
-                        <div id="myDropdown" class="dropdown-content">
-                
-                            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                            <a href="#Add" id="Add">Add: </a>
-                            <div id="dropdown-locations">
-                                    <p name="about" class="location">&nbsp;&nbsp; About</p>
-                                    <p name="base" class="location">&nbsp;&nbsp; Base</p>
-                                    <p name="blog" class="location">&nbsp;&nbsp; Blog</p>
-                                    <p name="contact" class="location">&nbsp;&nbsp; Contact</p>
-                                    <p name="custom" class="location">&nbsp;&nbsp; Custom</p>
-                                    <p name="support" class="location">&nbsp;&nbsp; Support</p>
-                                    <p name="tools" class="location">&nbsp;&nbsp; Tools</p>
-                            </div>
-                        </div>
+                    <div id="add-content"><img src="static/images/addSymbol.png" alt="add" width=30px height=30px id="add-symbol" />
+                        <p id="Add">&nbsp;&nbsp; Add: </p></div>
+                   
+                    <div id="dropdown-locations">
+                            <p id="about" class="location">&nbsp;&nbsp; About</p>
+                            <p id="base" class="location">&nbsp;&nbsp; Base</p>
+                            <p id="blog" class="location">&nbsp;&nbsp; Blog</p>
+                            <p id="contact" class="location">&nbsp;&nbsp; Contact</p>
+                            <p id="custom" class="location">&nbsp;&nbsp; Custom</p>
+                            <p id="support" class="location">&nbsp;&nbsp; Support</p>
+                            <p id="tools" class="location">&nbsp;&nbsp; Tools</p>
                     </div>
-        </label>
+                </div>
+            </div>
         
+            <br />
     </p>
 
     <p>
@@ -66,6 +69,6 @@
 </form>
 
     </div>
-    <script src="./Departure waypoint.js"></script>
+    <script src="static/Departure_waypoint.js"></script>
 </body>
 </html>
