@@ -74,5 +74,4 @@ $("#add-symbol").click(() => { //when clicking on add symbol
     $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
     $("#selected").val(text); //add text
     $("#selection").text(text); //show the selected text on the button
-    $("#selected-content").show().text(text);
 })
