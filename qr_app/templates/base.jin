@@ -4,6 +4,7 @@
     <title dir="rtl">סורק ברקודים</title>
     <div id="header-container"></div>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="stylesheet" href="static/css/aviStyle.css"/>
     {% block scripts %}
     {% endblock %}
 </head>

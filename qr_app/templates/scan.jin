@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block main %}
+{% with  curr_flight = flight_session.get_current_flight() %}
 <div class="header">
     <div class="cam">
 
@@ -15,7 +16,7 @@
                 <video id="preview"></video>
             </div>
             <div>
-                <form method="GET" novalidate action="{{ url_for('stop_flight', flight_id=flight_session.flight_id) }}">
+                <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=curr_flight.id, callback=url_for('homepage')) }}">
                     <input type="hidden" name="flight_id" value="{{ flight_session.flight_id }}">
                     <input type="hidden" name="callback" value="{{ url_for('homepage') }}">
                     <input id="submit" name="submit" type="submit" value="Finish">
@@ -24,6 +25,17 @@
             <div class="answer_canvas">
                 <p class="answer"></p>
             </div>
+        </div>
+        <div class="components_list" style="visible:hidden">
+            <ul>
+                {% for code, check in curr_flight.components_types_check().items() %}
+                    {% if check %}
+                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px" /><p>{{ curr_flight.typecode2typename(code) }}</p>
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/red_checkmark.png' ) }}" width="20px" height="15px" /><p>{{ curr_flight.typecode2typename(code) }}</p>
+                    {% endif %}
+                {% endfor %}
+            </ujl>
         </div>
 
         <script type="text/javascript">
@@ -69,6 +81,7 @@
         </script>
 
     </div>
+    {% endwith %}
     {% endblock %}
 
     {% block footer %}

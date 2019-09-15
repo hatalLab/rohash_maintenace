@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title dir="rtl">סורק ברקודים</title>
+    <div id="header-container"></div>
+    <link rel="stylesheet" href="static/css/style.css"/>
+    <link rel="stylesheet" href="static/css/aviStyle.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px"; />
+        <ol>
+            <li class="menu-item" ><a  href="/new-flight">Start flight</a></li>
+            <li class="menu-item" ><a  href="/end-flight">End flight</a></li>
+            <li class="menu-item" ><a  href="/scan">Scan component</a></li>
+            <li class="menu-item" ><a  href="/flights">Flights</a></li>
+
+                <p>No flight running</p>
+
+        </ol>
+    </div>
+
+    <div class="main_container">
+
+<form method="post" action="" novalidate>
+    <input id="csrf_token" name="csrf_token" type="hidden" value="IjM0MGExNmYxNzA0YWY4OTA5MjVjYzcxNDE5ZjFlZGNmZWZiMGQ0MmYi.XXnnTg.kCh5tiYfMWXYM97DfauC7lLE0Mg">
+
+    <p>
+        <label for="soldier1">Commander id</label>
+        <input id="soldier1" name="soldier1" type="text" value="">
+    </p>
+
+    <p>
+        <label for="soldier2">Pilot id</label>
+        <input id="soldier2" name="soldier2" type="text" value="">
+    </p>
+<!-- The input is in the label-->
+<!-- The "Departure waypoint" should be outside the selectfield, the first entry should be the selected one-->
+<!-- The list and the button need to be the same width-->
+<!-- Add a "+" sign next to the "Add" feature, that the user can click to add the field-->
+    <p>
+        <label for="coordinates">
+                <div class="dropdown">
+                        <button type="button" onclick="myFunction()" class="dropbtn"> Departure waypoint &nbsp;  &#9660</button>
+                        <div id="myDropdown" class="dropdown-content">
+
+                            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                            <a href="#Add" id="Add">Add: </a>
+                            <div id="dropdown-contentA">
+                                <a href="#about">About</a>
+                                <a href="#base">Base</a>
+                                <a href="#blog">Blog</a>
+                                <a href="#contact">Contact</a>
+                                <a href="#custom">Custom</a>
+                                <a href="#support">Support</a>
+                                <a href="#tools">Tools</a>
+                            </div>
+                        </div>
+                    </div>
+        </label>
+<!--        -->
+    </p>
+
+    <p>
+        <input id="submit" name="submit" type="submit" value="Add flight">
+    </p>
+
+</form>
+
+    </div>
+    <script src="static/javascript/departure_waypoint.js"></script>
+</body>
+</html>

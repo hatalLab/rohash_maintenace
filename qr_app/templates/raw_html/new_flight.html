@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,29 +6,31 @@
     <link rel="stylesheet" href="static/css/style.css"/>
     <link rel="stylesheet" href="static/css/aviStyle.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="navbar">
+    <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px" ;/>
+    <ol>
+        <li class="menu-item"><a href="/new-flight">Start flight</a></li>
+        <li class="menu-item"><a href="/end-flight">End flight</a></li>
+        <li class="menu-item"><a href="/scan">Scan component</a></li>
+        <li class="menu-item"><a href="/flights">Flights</a></li>
 
-    <div class="navbar">
-        <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px"; />
-        <ol>
-            <li class="menu-item" ><a  href="/new-flight">Start flight</a></li>
-            <li class="menu-item" ><a  href="/end-flight">End flight</a></li>
-            <li class="menu-item" ><a  href="/scan">Scan component</a></li>
-            <li class="menu-item" ><a  href="/flights">Flights</a></li>
-            
-                <p>No flight running</p>
-            
-        </ol>
-    </div>
+        <p>No flight running</p>
 
-    <div class="main_container">
-        
-<form method="post" action="" novalidate>
-    <input id="csrf_token" name="csrf_token" type="hidden" value="IjM0MGExNmYxNzA0YWY4OTA5MjVjYzcxNDE5ZjFlZGNmZWZiMGQ0MmYi.XXnnTg.kCh5tiYfMWXYM97DfauC7lLE0Mg">
+    </ol>
+</div>
 
-    <p>
-        <label for="soldier1">Commander id</label>
-        <input id="soldier1" name="soldier1" type="text" value="">
-    </p>
+<div class="main_container">
+
+    <form method="post" action="" novalidate>
+        <input id="csrf_token" name="csrf_token" type="hidden"
+               value="IjM0MGExNmYxNzA0YWY4OTA5MjVjYzcxNDE5ZjFlZGNmZWZiMGQ0MmYi.XXnnTg.kCh5tiYfMWXYM97DfauC7lLE0Mg">
+
+        <p>
+            <label for="soldier1">Commander id</label>
+            <input id="soldier1" name="soldier1" type="text" value="">
+        </p>
 
     <p>
         <label for="soldier2">Pilot id</label>
@@ -61,14 +62,13 @@
         
             <br />
     </p>
+       <p>
+            <input id="submit" name="submit" type="submit" value="Add flight">
+        </p>
 
-    <p>
-        <input id="submit" name="submit" type="submit" value="Add flight">
-    </p>
+    </form>
 
-</form>
-
-    </div>
-    <script src="static/Departure_waypoint.js"></script>
+</div>
+<script src="static/javascript/departure_waypoint.js"></script>
 </body>
 </html>
