@@ -55,7 +55,7 @@ $(".location").click((event) => {
     $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
     $("#selected").val(id);
     $("#selection").text(event.target.textContent); //show the selected text on the button
-    $("#selected-content").show().text(text);
+    //$("#selected-content").show().text(text);
     $("#"+id).hide();
     console.log(event.target.id);
 });
