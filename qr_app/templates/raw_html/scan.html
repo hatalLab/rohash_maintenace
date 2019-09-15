@@ -4,9 +4,10 @@
 <head>
     <title dir="rtl">סורק ברקודים</title>
     <div id="header-container"></div>
-    <link rel="stylesheet" href="/static/css/style.css"/>
+    <link rel="stylesheet" href="static/css/style.css"/>
+    <link rel="stylesheet" href="static/css/components_list_style.css"/>
     
-<script type="text/javascript" src="/static/javascript/instascan.min.js"></script>
+<script type="text/javascript" src="static/javascript/instascan.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
@@ -14,7 +15,7 @@
 <body>
 
     <div class="navbar">
-        <img class="logo" src="/static/images/hatal.jpg" style="width:100px;height:100px"; />
+        <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px"; />
         <ol>
             <a href="/new-flight"><li>Start flight</li></a>
             <a href="/end-flight"><li>End flight</li></a>
@@ -34,7 +35,7 @@
 
         <div class="canvases_container">
             <div class="video_canvas">
-                <img class="loading" src="/static/images/loading.gif"/>
+                <img class="loading" src="static/images/loading.gif"/>
                 <video id="preview"></video>
             </div>
             <div>
@@ -48,35 +49,23 @@
                 <p class="answer"></p>
             </div>
         </div>
-        <div class="components_list" style="visible:hidden">
-            <ul>
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Right wing</p>
-                    
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Small wing</p>
-                    
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Tail</p>
-                    
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Head</p>
-                    
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Elastic</p>
-                    
-                
-                    
-                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Motor</p>
-                    
-                
-            </ujl>
-        </div>
+        <div id="components_list" class="components_list">
+            <p class="drop_cmp_list"></p>
+            <div id="myList" class="dropdown-list">
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Right wing</p>
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Small wing</p>
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Tail</p>
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Head</p>
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Elastic</p>
+               <img src="static/images/red_checkmark.png" width="20px" height="15px" />
+               <p>Motor</p>
+            </div>
+         </div>
 
         <script type="text/javascript">
 
@@ -119,6 +108,7 @@
 
 
         </script>
+        <script src="static/component_list.js"></script>
 
     </div>
     
