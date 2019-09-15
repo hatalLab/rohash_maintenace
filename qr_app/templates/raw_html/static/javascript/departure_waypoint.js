@@ -54,10 +54,8 @@ $(".location").click((event) => {
     $("#selected").remove(); //delete the previous selection
     $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
     $("#selected").val(id);
-    $("#selection").text(event.target.textContent); //show the selected text on the button
-    //$("#selected-content").show().text(text);
+    $("#selection").text(text); //show the selected text on the button
     $("#"+id).hide();
-    console.log(event.target.id);
 });
 
 $("#selected-content").click(() =>{
