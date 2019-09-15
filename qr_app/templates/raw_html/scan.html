@@ -1,62 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title dir="rtl">סורק ברקודים</title>
-    <script type="text/javascript" src="./instascan.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <div id="header-container"></div>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-
-  <body>
+    <link rel="stylesheet" href="/static/css/style.css"/>
     
+<script type="text/javascript" src="/static/javascript/instascan.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
     <div class="navbar">
-        <script src="./addition.js"></script>
-      <img class="logo1" src="./hatall.png" style="width:100px;height:100px"; />
-      <img class="logo2" src="./zi.png" style="width:100px;height:100px"; />
-    
-      <div class="headline" dir="rtl">סורק הברקודים</div>
+        <img class="logo" src="/static/images/hatal.jpg" style="width:100px;height:100px"; />
+        <ol>
+            <a href="/new-flight"><li>Start flight</li></a>
+            <a href="/end-flight"><li>End flight</li></a>
+            <a href="/scan"><li>Scan component</li></a>
+            <a href="/flights"><li>Flights</li></a>
+            
+                <a href="/flight-details/12">Flight: 12 (Avengers)</a>
+            
+        </ol>
     </div>
-    
-      <div class="cam">
-          <img class="loading" src="./loading.gif" />
-          <script>
-          $(".loading").hide();
-          </script>
-    <video id="preview"></video>
-    <div class="answer"></div>
-    <script type="text/javascript">
 
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-
-      scanner.addListener('scan', function (content) {
-        let encoded=btoa(content);
-          /* $.post('qr-process',encoded,function(){
-            $("#preview").hide();
-            $(".loading").show();
-          }); */
-        // window.location.href = '/qr-process/'+ encoded; 
+    <div class="main_container">
         
-        $("#preview").hide();//hide camera
-            $(".loading").show();//load loading gif instead
-       let xhttp=new XMLHttpRequest();
-       xhttp.open("POST", "/qr-process", true);
-       xhttp.send(encoded);
-       xhttp.onreadystatechange=function(){
-         if(this.readyState==4){
-           if(this.status==200){
-             $(".loading").hide();//hide loading gif
-             $(".answer").text("Succeeded");
-           }
-           else{
-             $(".loading").hide();
-             $(".answer").text("Faild. Please try again");
-             $(".answer").hide(3000);
-             $("#preview").show();
-           }
-         }
-       }
-      });
+
+<div class="header">
+    <div class="cam">
+
+        <div class="canvases_container">
+            <div class="video_canvas">
+                <img class="loading" src="/static/images/loading.gif"/>
+                <video id="preview"></video>
+            </div>
+            <div>
+                <form method="GET" novalidate action="/stop-flight/12?callback=%2F">
+                    <input type="hidden" name="flight_id" value="12">
+                    <input type="hidden" name="callback" value="/">
+                    <input id="submit" name="submit" type="submit" value="Finish">
+                </form>
+            </div>
+            <div class="answer_canvas">
+                <p class="answer"></p>
+            </div>
+        </div>
+        <div class="components_list" style="visible:hidden">
+            <ul>
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Right wing</p>
+                    
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Small wing</p>
+                    
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Tail</p>
+                    
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Head</p>
+                    
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Elastic</p>
+                    
+                
+                    
+                        <img src="/static/images/red_checkmark.png" width="20px" height="15px" /><p>Motor</p>
+                    
+                
+            </ujl>
+        </div>
+
+        <script type="text/javascript">
+
+            $(".loading").hide();
+            $(".submit").hide();
+            let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+
+            scanner.addListener('scan', function (content) {
+                $(".submit").show();
+                let encoded=btoa(content);
+                $("#preview").toggle();     //toggle camera
+                $(".loading").toggle();     //load loading gif instead
+                let xhttp=new XMLHttpRequest();
+                xhttp.open("GET", "/api-qr-process/"+encoded, true);
+                xhttp.send();
+                xhttp.onreadystatechange=function(){
+                    if(this.readyState==4){
+                    var resp = JSON.parse(this.responseText);
+
+                    $(".loading").toggle();    //toggle loading gif
+                    $(".answer").text(resp['text']);
+                    $("#preview").toggle();    //toggle camera
+                    if (!this.status==200){
+                        alert("Failed to read qr code");
+                        }
+                     }
+                 }
+          });
 
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
@@ -68,8 +116,13 @@
         console.error(e);
       });
 
-    </script>
-     
-      </div>
-  </body>
+
+
+        </script>
+
+    </div>
+    
+    
+    </div>
+</body>
 </html>
