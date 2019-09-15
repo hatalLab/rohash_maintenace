@@ -15,7 +15,7 @@
                 <video id="preview"></video>
             </div>
             <div>
-                <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=flight.id, callback=url_for('homepage')) }}">
+                <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=flight_session.flight_id, callback=url_for('homepage')) }}">
                     <input type="hidden" name="flight_id" value="{{ flight_session.flight_id }}">
                     <input type="hidden" name="callback" value="{{ url_for('homepage') }}">
                     <input id="submit" name="submit" type="submit" value="Finish">
@@ -74,4 +74,3 @@
     {% block footer %}
 
     {% endblock %}
-
