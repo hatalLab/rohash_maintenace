@@ -4,13 +4,14 @@ import wtforms
 from wtforms import validators as val
 from sqlalchemy.inspection import inspect
 
-
-
 class NewFlight(flask_wtf.FlaskForm):
 
     soldier1        = wtforms.IntegerField("Commander id")
     soldier2        = wtforms.IntegerField("Pilot id")
-    coordinates     = wtforms.SelectField("Departure waypoint", choices=[])
+    coordinates     = wtforms.SelectField("Departure waypoint", choices=[
+                                                                                    ((1,2), "tel aviv"),
+                                                                                    ((3,4), "barcelone"),
+    ])
     submit          = wtforms.SubmitField("Add flight")
 
     def update_coordinates(self):

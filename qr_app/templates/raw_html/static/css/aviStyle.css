@@ -90,7 +90,7 @@
 }
 /* Change color of dropdown links on hover */
 
-#dropdown-locations p:hover {
+#dropdown-choicesp:hover {
 	background-color: blue;
 }
 
