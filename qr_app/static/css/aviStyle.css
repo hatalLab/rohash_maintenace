@@ -1,15 +1,28 @@
 /* Dropdown Button */
 
 .dropbtn {
+	display: flex;
 	background-color: black;
 	color: white;
 	padding: 16px;
     font-size: 16px;
-    min-width: 262px;
+    min-width: 261px;
 	border: none;
 	cursor: pointer;
+	justify-content: space-between;
 }
 
+#selection{
+	margin: 0;
+}
+#selected-content{
+	margin: 0;
+}
+.departure-waypoint{
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+}
 
 /* The search field */
 
@@ -53,18 +66,32 @@
 
 /* Links inside the dropdown */
 
-.dropdown-content a {
+.dropdown-content p,#add-content {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
 }
 
+#add-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 0;
+}
 
+#Add{
+	margin-left: 20px;
+	padding: 0;
+}
+
+#add-symbol{
+	margin-top: 10px;
+}
 /* Change color of dropdown links on hover */
 
-.dropdown-content a:hover {
-	background-color: #f1f1f1
+#dropdown-choicesp:hover {
+	background-color: blue;
 }
 
 

@@ -17,7 +17,7 @@
 
     <p>
         {{ form.coordinates.label }}
-        {{ form.coordinates(type="hidden") }}
+        {{ form.coordinates(hidden="hidden") }}
 
         <div class="dropdown">
                 <button type="button" onclick="myFunction()" class="dropbtn">
@@ -45,7 +45,7 @@
     <p>
         {{ form.submit() }}
     </p>
-
+    <script src="{{ url_for('static', filename='javascript/departure_waypoint.js') }}"></script>
 </form>
 {% endblock %}
 
