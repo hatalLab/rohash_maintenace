@@ -2,6 +2,7 @@
 toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+    $("#N,#E,#Add").text("");
 }
 
 function filterFunction() { //filter search result
@@ -20,12 +21,10 @@ function filterFunction() { //filter search result
             p[i].style.display = "none";
             count--;
         }
-        if (count === 0){ //that mean ther isn't such a location
+        /* if (count === 0){ //that mean ther isn't such a location
             $("#Add,#add-content").show(); //show add new location
         }else
-            $("#Add, #add-content").hide();
-            /* xEvent.value='';
-            yEvent.value=''; */
+            $("#Add, #add-content").hide(); */
     }
 }
 
@@ -33,10 +32,10 @@ function addLocation() { //adding input content to the add element
     let node, text;
     node = document.getElementById("Add");
     text = input.value;
-    let div = "<div id=\"xAndY\"><p id=\"x\"></p><p id=\"y\"></p></div>";
+    let div = "<div id=\"NorthAndEast\"><p id=\"N\"></p><p id=\"E\"></p></div>";
     $("#Add").html("Add: <b>Name:</b> " + `${text}`).append(div);
-    $("#x").text(`X: ${xEvent.value}`);
-    $("#y").text(`Y: ${yEvent.value}`);
+    $("#N").text(`N: ${nEvent.value}`);
+    $("#E").text(`E: ${eEvent.value}`);
     showAddSymbol();
 }
 
@@ -44,16 +43,16 @@ function addLocation() { //adding input content to the add element
 
 let input = document.getElementById("myInput");
 input.addEventListener('keyup', () => addLocation());
-let xEvent = document.getElementById("newX");
-let yEvent = document.getElementById('newY');
+let nEvent = document.getElementById("newN");
+let eEvent = document.getElementById('newE');
 
-xEvent.addEventListener('keyup', () => {
+nEvent.addEventListener('keyup', () => {
     filterFunction();
     showAddSymbol();
     addLocation();
 });
 
-yEvent.addEventListener('keyup', () => {
+eEvent.addEventListener('keyup', () => {
     filterFunction();
     showAddSymbol();
     addLocation();
@@ -61,15 +60,15 @@ yEvent.addEventListener('keyup', () => {
 
 function showAddSymbol() { //show the plus symbol when the user enter name x and y
     let name = input.value;
-    let x = xEvent.value;
-    let y = yEvent.value;
+    let north = nEvent.value;
+    let east = eEvent.value;
 
-    if (name && x && y) {
+    if (name && north && east) {
         $("#addSymbol").show();
     }
 }
 
-$("#addSymbol, #Add, #add-content").hide();
+// $("#addSymbol, #Add, #add-content").hide();
 
 //choosing location from the list
 $(".location").click((event) => {
@@ -86,19 +85,16 @@ $(".location").click((event) => {
 
 //adding and choosing new location
 $("#addSymbol").click(() => { //when clicking on add symbol
-    let Name = input.value; //copy the new location
-    let x = xEvent.value;
-    let y = yEvent.value;
-    let newId = `Name:${Name}_X:${x}_Y:${y}`;
-    let newText = `${Name}  X: ${x}  Y: ${y}`;
+    let newId = `Name:${input.value}_N:${nEvent.value}_E:${eEvent.value}`;
+    let newText = `${input.value} \n(N${nEvent.value}, E${eEvent.value})`;
     input.value = '';
-    xEvent.value = '';
-    yEvent.value = '';
+    nEvent.value = '';
+    eEvent.value = '';
     $(".location").show(); //show all locations
     $("#dropdown-locations").append(`<p id="${newId}" class="location">${newText}</p>`)
         .children().last().hide();; //add new p element with the location and hide it
     myFunction(); //close the menu
-    $("#add-content").hide(); //hide plus symbol
+    // $("#add-content").hide(); //hide plus symbol
     $("#selected").remove(); //delete the previous selection
     $("#selector").append(`<option id=\"selected\" value="${newId}" selected></option>`); //add the new selection
     $("#selection").text(newText); //show the selected text on the button
