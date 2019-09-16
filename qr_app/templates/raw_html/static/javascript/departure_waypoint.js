@@ -20,11 +20,12 @@ function filterFunction() { //filter search result
             p[i].style.display = "none";
             count--;
         }
-        if (count === 0){
-            $("#add-content").show(); //show add new location
-            $("#selected-content").hide(); //hide the previous selected location
+        if (count === 0){ //that mean ther isn't such a location
+            $("#Add,#add-content").show(); //show add new location
         }else
-            $("#add-content").hide();
+            $("#Add, #add-content").hide();
+            /* xEvent.value='';
+            yEvent.value=''; */
     }
 }
 
@@ -32,46 +33,73 @@ function addLocation() { //adding input content to the add element
     let node, text;
     node = document.getElementById("Add");
     text = input.value;
-    $("#Add").text("Add: " + `${text}`);
+    let div = "<div id=\"xAndY\"><p id=\"x\"></p><p id=\"y\"></p></div>";
+    $("#Add").html("Add: <b>Name:</b> " + `${text}`).append(div);
+    $("#x").text(`X: ${xEvent.value}`);
+    $("#y").text(`Y: ${yEvent.value}`);
+    showAddSymbol();
 }
 
-let input = document.getElementById("myInput"); 
+
+
+let input = document.getElementById("myInput");
 input.addEventListener('keyup', () => addLocation());
+let xEvent = document.getElementById("newX");
+let yEvent = document.getElementById('newY');
 
+xEvent.addEventListener('keyup', () => {
+    filterFunction();
+    showAddSymbol();
+    addLocation();
+});
 
-$("#add-content").hide();
+yEvent.addEventListener('keyup', () => {
+    filterFunction();
+    showAddSymbol();
+    addLocation();
+});
 
-$("#selected-content").css({
-    "background-color": "black",
-    "color": "white"
-}).hide();
+function showAddSymbol() { //show the plus symbol when the user enter name x and y
+    let name = input.value;
+    let x = xEvent.value;
+    let y = yEvent.value;
 
+    if (name && x && y) {
+        $("#addSymbol").show();
+    }
+}
+
+$("#addSymbol, #Add, #add-content").hide();
+
+//choosing location from the list
 $(".location").click((event) => {
-    myFunction();   //close dropdown menu
-    let id =event.target.id;  //save id
-    let text=event.target.textContent;
+    myFunction(); //close dropdown menu
+    let id = event.target.id; //save id
+    let text = event.target.textContent;
     $(".location").show();
     $("#selected").remove(); //delete the previous selection
-    $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
+    $("#selector").append("<option id=\"selected\" selected></option>"); //add the new selection
     $("#selected").val(id);
     $("#selection").text(text); //show the selected text on the button
-    $("#"+id).hide();
+    $("#" + $.escapeSelector(id)).hide();
 });
 
-$("#selected-content").click(() =>{
-    myFunction(); //close the dropdown menu
-});
-
-$("#add-symbol").click(() => { //when clicking on add symbol
-    let text=input.value; //copy the new location
-    input.value='';
-    $(".location").show();//show all locations
-    $("#dropdown-locations").append("<p class=\"location\"></p>"); //add new p element with the location
-    $("#dropdown-locations").children().last().text(text).hide();
-    myFunction();//close the menu
-    $("#add-content").hide();
+//adding and choosing new location
+$("#addSymbol").click(() => { //when clicking on add symbol
+    let Name = input.value; //copy the new location
+    let x = xEvent.value;
+    let y = yEvent.value;
+    let newId = `Name:${Name}_X:${x}_Y:${y}`;
+    let newText = `${Name}  X: ${x}  Y: ${y}`;
+    input.value = '';
+    xEvent.value = '';
+    yEvent.value = '';
+    $(".location").show(); //show all locations
+    $("#dropdown-locations").append(`<p id="${newId}" class="location">${newText}</p>`)
+        .children().last().hide();; //add new p element with the location and hide it
+    myFunction(); //close the menu
+    $("#add-content").hide(); //hide plus symbol
     $("#selected").remove(); //delete the previous selection
-    $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
-    $("#selected").val(text); //add text
-    $("#selection").text(text); //show the selected text on the button
-})
+    $("#selector").append(`<option id=\"selected\" value="${newId}" selected></option>`); //add the new selection
+    $("#selection").text(newText); //show the selected text on the button
+});
