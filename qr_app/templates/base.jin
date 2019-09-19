@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    {#  Navbar   #}
     <div class="navbar">
         <img class="logo" src="{{ url_for('static', filename='images/hatal.jpg') }}" style="width:100px;height:100px"; />
         <ol>
@@ -32,6 +32,15 @@
             {% endif %}
         </ol>
     </div>
+    {#  end of navbar #}
+
+    {# Flash messages #}
+    <div class="flashed_messages">
+        {%  for msg in get_flashed_messages() %}
+            <p>{{ msg }}</p>
+        {% endfor %}
+    </div>
+    {# End of flash messages #}
 
     <div class="main_container">
         {% block main %}

@@ -2,6 +2,7 @@
 toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+    $("#N,#E,#Add").text("");
 }
 
 function filterFunction() { //filter search result
@@ -20,11 +21,10 @@ function filterFunction() { //filter search result
             p[i].style.display = "none";
             count--;
         }
-        if (count === 0){
-            $("#add-content").show(); //show add new location
-            $("#selected-content").hide(); //hide the previous selected location
+        /* if (count === 0){ //that mean ther isn't such a location
+            $("#Add,#add-content").show(); //show add new location
         }else
-            $("#add-content").hide();
+            $("#Add, #add-content").hide(); */
     }
 }
 
@@ -32,50 +32,70 @@ function addLocation() { //adding input content to the add element
     let node, text;
     node = document.getElementById("Add");
     text = input.value;
-    $("#Add").text("Add: " + `${text}`);
+    let div = "<div id=\"NorthAndEast\"><p id=\"N\"></p><p id=\"E\"></p></div>";
+    $("#Add").html("Add: <b>Name:</b> " + `${text}`).append(div);
+    $("#N").text(`N: ${nEvent.value}`);
+    $("#E").text(`E: ${eEvent.value}`);
+    showAddSymbol();
 }
 
+
+
 let input = document.getElementById("myInput");
-console.log(input);
 input.addEventListener('keyup', () => addLocation());
+let nEvent = document.getElementById("newN");
+let eEvent = document.getElementById('newE');
 
+nEvent.addEventListener('keyup', () => {
+    filterFunction();
+    showAddSymbol();
+    addLocation();
+});
 
-$("#add-content").hide();
+eEvent.addEventListener('keyup', () => {
+    filterFunction();
+    showAddSymbol();
+    addLocation();
+});
 
-$("#selected-content").css({
-    "background-color": "black",
-    "color": "white"
-}).hide();
+function showAddSymbol() { //show the plus symbol when the user enter name x and y
+    let name = input.value;
+    let north = nEvent.value;
+    let east = eEvent.value;
 
+    if (name && north && east) {
+        $("#addSymbol").show();
+    }
+}
+
+// $("#addSymbol, #Add, #add-content").hide();
+
+//choosing location from the list
 $(".location").click((event) => {
-    myFunction();   //close dropdown menu
-    let id =event.target.id;  //save id
-    let text=event.target.textContent;
+    myFunction(); //close dropdown menu
+    let id = event.target.id; //save id
+    let text = event.target.textContent;
     $(".location").show();
     $("#selected").remove(); //delete the previous selection
-    $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
+    $("#selector").append("<option id=\"selected\" selected></option>"); //add the new selection
     $("#selected").val(id);
-    $("#selection").text(event.target.textContent); //show the selected text on the button
-    $("#selected-content").show().text(text);
-    $("#"+id).hide();
-    console.log(event.target.id);
-});
-
-$("#selected-content").click(() =>{
-    myFunction(); //close the dropdown menu
-});
-
-$("#add-symbol").click(() => { //when clicking on add symbol
-    let text=input.value; //copy the new location
-    input.value='';
-    $(".location").show();//show all locations
-    $("#dropdown-locations").append("<p class=\"location\"></p>"); //add new p element with the location
-    $("#dropdown-locations").children().last().text(text).hide();
-    myFunction();//close the menu
-    $("#add-content").hide();
-    $("#selected").remove(); //delete the previous selection
-    $("#selector").append("<option id=\"selected\" selected></option>");  //add the new selection
-    $("#selected").val(text); //add text
     $("#selection").text(text); //show the selected text on the button
-    $("#selected-content").show().text(text);
-})
+    $("#" + $.escapeSelector(id)).hide();
+});
+
+//adding and choosing new location
+$("#addSymbol").click(() => { //when clicking on add symbol
+    let newId = `Name:${input.value}_N:${nEvent.value}_E:${eEvent.value}`;
+    let newText = `${input.value} \n(N${nEvent.value}, E${eEvent.value})`;
+    input.value = '';
+    nEvent.value = '';
+    eEvent.value = '';
+    $(".location").show(); //show all locations
+    $("#dropdown-locations").append(`<p id="${newId}" class="location">${newText}</p>`)
+        .children().last().hide();; //add new p element with the location and hide it
+    myFunction(); //close the menu
+    // $("#add-content").hide(); //hide plus symbol
+    $("#selected").remove(); //delete the previous selection
+    $("#selector").append(`<option id=\"selected\" value="${newId}" selected></option>`); //add the new selection
+    $("#selection").text(newText); //show the selected text on the button
+});

@@ -2,51 +2,54 @@
 
 
 {% block main %}
-<form method="post" action="" novalidate>
-    {{ form.hidden_tag() }}
+    <form method="post" action="" novalidate>
+        {{ form.hidden_tag() }}
 
-    <p>
-        {{ form.soldier1.label }}
-        {{ form.soldier1() }}
-    </p>
+        <p>
+            {{ form.soldier1.label }}
+            {{ form.soldier1() }}
+        </p>
 
-    <p>
-        {{ form.soldier2.label }}
-        {{ form.soldier2() }}
-    </p>
+        <p>
+            {{ form.soldier2.label }}
+            {{ form.soldier2() }}
+        </p>
 
-    <p>
-        {{ form.coordinates.label }}
-        {{ form.coordinates(hidden="hidden") }}
+        <p>
+            {{ form.coordinates.label }}
+            {{ form.coordinates(hidden="hidden") }}
 
-        <div class="dropdown">
+            <div class="dropdown">
                 <button type="button" onclick="myFunction()" class="dropbtn">
-        <p id="selection"></p> &nbsp; &#9660
-        </button>
+                <p id="selection"></p> &nbsp; &#9660
+                </button>
+                <div id="myDropdown" class="dropdown-content">
 
-        <div id="myDropdown" class="dropdown-content">
-            <p id="selected-content"></p>
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br>
 
-            <div id="add-content"><img src="static/images/addSymbol.png" alt="add" width=30px height=30px
-                                       id="add-symbol"/>
-                <p id="Add">&nbsp;&nbsp; Add: </p></div>
+            <div id="add-content">
+                <img id="addSymbol" src="{{ url_for('static', filename='images/addSymbol.png' ) }}" alt="add" width=30px
+                     height=30px/>
+                <p id="Add">&nbsp;&nbsp; Add: </p>
+            </div>
+
+            <div id="addition">
+                <input type="text" placeholder="North" id="newN">
+                <input type="text" placeholder="East" id="newE">
+            </div>
 
             <div id="dropdown-locations">
                 {% for choice in form.coordinates.choices %}
                     <p class="location" id="{{ choice[0] }}">&nbsp;&nbsp; {{ choice[1] }}</p>
                 {% endfor %}
             </div>
+
         </div>
-</div>
-
-    </p>
-
-    <p>
-        {{ form.submit() }}
-    </p>
-    <script src="{{ url_for('static', filename='javascript/departure_waypoint.js') }}"></script>
-</form>
+        <p>
+            {{ form.submit() }}
+        </p>
+        <script src="{{ url_for('static', filename='javascript/departure_waypoint.js') }}"></script>
+        </p></p></form>
 {% endblock %}
 
 
@@ -55,5 +58,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% endblock %}

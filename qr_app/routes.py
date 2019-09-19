@@ -2,7 +2,7 @@ import flask
 import base64
 import functools
 from qr_app import forms, models
-from qr_app import app, flight_session
+from qr_app import app, flight_session, db
 
 ##### utils #####
 
@@ -40,20 +40,31 @@ def homepage():
 @app.route('/new-flight',  methods=("GET", "POST"))
 def new_flight():
     form = forms.NewFlight()
-    if form.validate_on_submit():
-        commander   = models.Soldier(id=form.soldier1.data, role="commander")
-        pilot       = models.Soldier(id=form.soldier2.data, role="pilot")
-        coords_data = form.coordinates.data
-        coordinates = models.Coordinates(x=coords_data[0], y=coords_data[1])
-        new_flight = models.Flight(team_name=form.team_name.data)
 
-        new_flight.soldiers.append(commander)
-        new_flight.soldiers.append(pilot)
-        coordinates.flights.append(new_flight)
+    if form.validate_on_submit():
+        # Create soldiers
+        commander    = models.Soldier(id=form.soldier1.data, role="commander")
+        pilot                   = models.Soldier(id=form.soldier2.data, role="pilot")
+
+        # Create coordinates objects
+        coords_data = form.coordinates.data
+        print('coords data:',coords_data)
+        coordinates = models.Coordinates(north=coords_data[0], east=coords_data[1])
+        db.session.add(coordinates)
+        db.session.commit()
+
+        # Create the flight
+        new_flight = models.Flight()
+        new_flight.add_soldier(commander)
+        new_flight.add_soldier(pilot)
+        new_flight.start_coords = coordinates
 
         new_flight.add_to_db()
         set_flight(new_flight.id)
         return flask.redirect(flask.url_for('scan', flight=new_flight))
+
+    else:
+        print("Errors in form:",form.errors)
 
     return flask.render_template("new_flight.jin", form=form)
 

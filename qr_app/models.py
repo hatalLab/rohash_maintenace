@@ -2,6 +2,7 @@ import flask
 from datetime import datetime
 from qr_app import db
 
+
 class BasicModel():
 
     def add_to_db(self):
@@ -14,6 +15,7 @@ class BasicModel():
             return False
         return True
 
+
 flights_to_components = db.Table('flights_to_comps',
                                  db.Column('flight_id', db.Integer, db.ForeignKey('flight.id'), primary_key=True),
                                  db.Column('comp_id', db.Integer, db.ForeignKey('component.id'), primary_key=True)
@@ -22,20 +24,24 @@ flights_to_components = db.Table('flights_to_comps',
 flights_to_soldiers = db.Table('flights_to_soldiers',
                                db.Column('flight_id', db.Integer, db.ForeignKey('flight.id'), primary_key=True),
                                db.Column('soldier_id', db.Integer, db.ForeignKey('soldier.id'), primary_key=True)
-                                )
+                               )
 
-class  Flight(BasicModel, db.Model):
 
-    id          = db.Column(db.Integer, primary_key=True)
-    alive       = db.Column(db.Boolean, default=True)
-    start_time  = db.Column(db.DateTime, default=datetime.now())
-    end_time    = db.Column(db.DateTime)
+class Flight(BasicModel, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    alive = db.Column(db.Boolean, default=True)
+    start_time = db.Column(db.DateTime, default=datetime.now())
+    end_time = db.Column(db.DateTime)
 
     start_coords_id = db.Column(db.Integer, db.ForeignKey('coordinates.id'))
     end_coords_id = db.Column(db.Integer, db.ForeignKey('coordinates.id'))
+    start_coord         = db.relationship("Coordinates", foreign_keys=start_coords_id)
+    end_coord         = db.relationship("Coordinates", foreign_keys=end_coords_id)
 
-    components  = db.relationship("Component", secondary=flights_to_components, lazy='subquery', backref=db.backref('flights',lazy=True))
-    soldiers    = db.relationship("Soldier", secondary=flights_to_soldiers, lazy='subquery', backref=db.backref('flights', lazy=True))
+    components = db.relationship("Component", secondary=flights_to_components, lazy='subquery',
+                                 backref=db.backref('flights', lazy=True))
+    soldiers = db.relationship("Soldier", secondary=flights_to_soldiers, lazy='subquery',
+                               backref=db.backref('flights', lazy=True))
 
     def add_component(self, comp):
         if comp.id not in [c.id for c in self.components]:
@@ -43,6 +49,10 @@ class  Flight(BasicModel, db.Model):
             db.session.commit()
             return True
         return False
+
+    def add_soldier(self, soldier):
+        self.soldiers.append(soldier)
+        return True
 
     def is_alive(self):
         return self.alive
@@ -78,7 +88,7 @@ class  Flight(BasicModel, db.Model):
     def human_flight_time(self):
         delta = self.flight_time()
         hours = delta // 3600
-        minutes = (delta - hours*3600)// 60
+        minutes = (delta - hours * 3600) // 60
         return "{:02.0f}:{:02.0f}".format(hours, minutes)
 
     @property
@@ -100,37 +110,37 @@ class  Flight(BasicModel, db.Model):
         return True
 
 
-class Soldier(BasicModel,db.Model):
-
-    id   = db.Column(db.Integer(), primary_key=True)
+class Soldier(BasicModel, db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
     role = db.Column(db.String(64))
     # flights --> list of Flight objects associated
 
 
-
 class Coordinates(BasicModel, db.Model):
-    id                   = db.Column(db.Float, primary_key=True) 
-    x                    = db.Column(db.Float)
-    y                    = db.Column(db.Float) 
-    flight               = db.Column(db.Integer, db.ForeignKey('flight.id'))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    north = db.Column(db.Float)
+    east    = db.Column(db.Float)
+    name = db.Column(db.String(64))
 
     def to_str(self):
-        return "{}-{}".format(self.x,self.y)
-class Component(BasicModel, db.Model):
+        return "{}_N:{}_E:{}".format(self.name, self.x, self.y)  # Change to east and north
 
-    id                = db.Column(db.Integer, primary_key=True)
+
+class Component(BasicModel, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     type_code = db.Column(db.String(64))
+
     # flights --> list of Flight object associated
 
     def total_used_time(self):
-        time_flew = sum([f.flight_time() for f in self.flights]) # time in seconds
+        time_flew = sum([f.flight_time() for f in self.flights])  # time in seconds
         return time_flew
 
     @property
     def human_total_used_time(self):
         time_flew = self.total_used_time()
         hours = time_flew // 3600
-        minutes = (time_flew-hours*3600) // 60
+        minutes = (time_flew - hours * 3600) // 60
         return "{:02.0f}:{:02.0f}".format(hours, minutes)
 
     @classmethod
@@ -143,13 +153,13 @@ class Component(BasicModel, db.Model):
     @classmethod
     def types_dict(cls):
         return {
-            'RW':"Right wing",
-            'SW':"Small wing",
-            'T':"Tail",
-            'H':"Head",
-            'E':"Elastic",
-            'M':"Motor"
-        } # ALWAYS UPPERCASE
+            'RW': "Right wing",
+            'SW': "Small wing",
+            'T': "Tail",
+            'H': "Head",
+            'E': "Elastic",
+            'M': "Motor"
+        }  # ALWAYS UPPERCASE
 
     @classmethod
     def typecode2typename(cls, code):
@@ -168,5 +178,3 @@ class Component(BasicModel, db.Model):
             db.session.rollback()
             return False
         return True
-
-
