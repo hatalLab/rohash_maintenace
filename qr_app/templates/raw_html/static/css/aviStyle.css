@@ -109,7 +109,7 @@
 /* Change color of dropdown links on hover */
 
 #dropdown-locations p:hover {
-	background-color: blue;
+	background-color:  #ddd;
 	cursor: pointer;
 }
 
