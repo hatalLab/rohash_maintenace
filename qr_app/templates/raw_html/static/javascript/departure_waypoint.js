@@ -4,7 +4,7 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
     $("#N,#E,#Add").text(""); //delete from the duv of the symbol the name,x,y
     $("#myInput, #newN,#newE, #newName").val(""); //delete the value of this fields
-  //  $(".location").show();
+    $("#addition").is(":visible") ? $("#addition").hide() : "";
 }
 
 function filterFunction() { //filter search result
@@ -34,7 +34,7 @@ function filterFunction() { //filter search result
 function addLocation() { //adding input content to the add element
     let node, text;
     node = document.getElementById("Add");
-    text = newName.value==="" ? input.value : newName.value; 
+    text = newName.value === "" ? input.value : newName.value;
     let div = "<div id=\"NorthAndEast\"><p id=\"N\"></p><p id=\"E\"></p></div>";
     $("#Add").html("Add: <b>Name:</b> " + `${text}`).append(div);
     $("#N").text(`N: ${northField.value}`);
@@ -43,6 +43,8 @@ function addLocation() { //adding input content to the add element
 }
 
 
+// $("#addition").hide();  //hide name n,e fields
+$("#addition").fadeOut(1);
 
 let input = document.getElementById("myInput");  //the search field
 input.addEventListener('keyup', () => addLocation());
@@ -68,11 +70,14 @@ newName.addEventListener("keyup", () => {
     addLocation()
 });
 
+
+
 function activateAddSymbol() { //show the plus symbol when the user enter name x and y
     let name = input.value;
-    let nameField=newName.value;
+    let nameField = newName.value;
     let north = northField.value;
     let east = eastField.value;
+    let meesage = [];
     if ((name || nameField) && north && east) {
         // $("#addSymbol").show();
         return true;
@@ -103,23 +108,30 @@ function handleClick(event){
 
 //adding and choosing new location
 $("#addSymbol").click(() => { //when clicking on add symbol
-    if(activateAddSymbol()){
-    let newId = `Name:${newName.value==="" ? input.value : newName.value}_N:${northField.value}_E:${eastField.value}_`;
-    let newText = `${newName.value==="" ? input.value : newName.value} <br> &emsp;&emsp;(N${northField.value}, E${eastField.value})`;
-    let padding=20;
-    input.value = '';
-    newName.value="";
-    northField.value = '';
-    eastField.value = '';
-    $(".location").show(); //show all locations
-    $("#dropdown-locations").append(`<p id="${newId}" class="location">${newText}</p>`)
-        .children().last().hide();; //add new p element with the location and hide it
-    myFunction(); //close the menu
-    // $("#add-content").hide(); //hide plus symbol
-    $("#selected").remove(); //delete the previous selection
-    $("#selector").append(`<option id="selected" value="${newId}" selected></option>`); //add the new selection as selected
-    $(".location").unbind().on('click', handleClick);
-    $("#selection").html(newText); //show the selected text on the button
-    $(".dropbtn").css("height",($("#selection").height()+padding+'px'));
+    //open addition element
+    $("#addition").is(":hidden") ?
+        $("#addition").fadeIn(1).css({
+            "margin-left": $("#myDropdown").outerWidth() + $("#myDropdown").offset().left,
+            "margin-top": $("#addition").offset().top - $("#Add").offset().top
+        }) : "";
+
+    if (activateAddSymbol()) {
+        let newId = `Name:${newName.value==="" ? input.value : newName.value}_N:${northField.value}_E:${eastField.value}_`;
+        let newText = `${newName.value==="" ? input.value : newName.value} <br> &emsp;&emsp;(N${northField.value}, E${eastField.value})`;
+        let padding = 20;
+        input.value = '';
+        newName.value = "";
+        northField.value = '';
+        eastField.value = '';
+        $(".location").show(); //show all locations
+        $("#dropdown-locations").append(`<p id="${newId}" class="location">${newText}</p>`)
+            .children().last().hide();; //add new p element with the location and hide it
+        myFunction(); //close the menu
+        // $("#add-content").hide(); //hide plus symbol
+        $("#selected").remove(); //delete the previous selection
+        $("#selector").append(`<option id="selected" value="${newId}" selected></option>`); //add the new selection as selected
+        $(".location").unbind().on('click', handleClick);
+        $("#selection").html(newText); //show the selected text on the button
+        $(".dropbtn").css("height", ($("#selection").height() + padding + 'px'));
     }
 });
