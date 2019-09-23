@@ -36,11 +36,12 @@
         <label for="soldier2">Pilot id</label>
         <input id="soldier2" name="soldier2" type="text" value="">
     </p>
-<select hidden id="selector"><option id="selected" selected></option></select>
+<select hidden id="selector"></select>
     <p class="departure-waypoint">
         <label for="coordinates"> Departure waypoint: </label>
         <div class="dropdown">
-                <button type="button" onclick="myFunction()" class="dropbtn"><p id="selection"></p> &nbsp;  &#9660</button>
+                <button type="button" onclick="myFunction()" class="dropbtn"><div id="selection">Select:<!-- <p id="nameOfLocation"></p> -->
+               <!--  <p id="coordinates"></p> --></div> &nbsp;  &#9660</button>
                 <div id="myDropdown" class="dropdown-content">
                     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br />
                     <div id="addition"><input type="text" placeholder="North" id="newN">
@@ -51,13 +52,13 @@
                         
                    
                     <div id="dropdown-locations">
-                            <p id="Name:About_N:1234.5_E:5678.6" class="location">&nbsp;&nbsp; About</p>
-                            <p id="Name:Base_N:1243.2_E:9456.4" class="location">&nbsp;&nbsp; Base</p>
-                            <p id="Name:Blog_N:24.5_E:3462.7" class="location">&nbsp;&nbsp; Blog</p>
-                            <p id="Name:Contact_N:567.3_E:546.4" class="location">&nbsp;&nbsp; Contact</p>
-                            <p id="Name:Custom_N:948.2_E:39.87" class="location">&nbsp;&nbsp; Custom</p>
-                            <p id="Name:Support_N:567.98_E:123.4" class="location">&nbsp;&nbsp; Support</p>
-                            <p id="Name:Tools_N:95.6_E:45.234" class="location">&nbsp;&nbsp; Tools</p>
+                            <p id="Name:About_N:1234_E:5678_" class="location">&nbsp;&nbsp; About</p>
+                            <p id="Name:Base_N:1243.2_E:9456.4_" class="location">&nbsp;&nbsp; Base</p>
+                            <p id="Name:Blog_N:24.5_E:3462.7_" class="location">&nbsp;&nbsp; Blog</p>
+                            <p id="Name:Contact_N:567.3_E:546.4_" class="location">&nbsp;&nbsp; Contact</p>
+                            <p id="Name:Custom_N:948.2_E:39.87_" class="location">&nbsp;&nbsp; Custom</p>
+                            <p id="Name:Support_N:567.98_E:123.4_" class="location">&nbsp;&nbsp; Support</p>
+                            <p id="Name:Tools_N:95.6_E:45.234_" class="location">&nbsp;&nbsp; Tools</p>
                     </div>
                 </div>
             </div>
