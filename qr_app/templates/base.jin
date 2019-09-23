@@ -4,7 +4,12 @@
     <title dir="rtl">סורק ברקודים</title>
     <div id="header-container"></div>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/component_style.css') }}"/>
     <link rel="stylesheet" href="static/css/aviStyle.css"/>
+    <!-- icon icons -->
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <!-- block scripts -->
     {% block scripts %}
     {% endblock %}
 </head>
@@ -20,12 +25,22 @@
             <li class="menu-item" ><a  href="{{ url_for('flights_history') }}">Flights</a></li>
             {% if flight_session.alive() %}
             <li class="menu-item" >
-                <a href="{{ url_for('flight_details', flight_id=flight_session.flight_id) }}">Flight: {{ flight_session. flight_id }} ({{ flight_session.get_team_name() }}</a>
-                <ol class="sub-menu">
-                    {% for component in flight_session.get_current_flight().components %}
-                        <li class="menu-item"><p>Component No°{{ component.id }}</p></li>
-                    {% endfor %}
-                </ol>
+                <div id="components_list" class="components_list">
+                    <p class="drop_cmp_list">Flight: {{ flight_session.flight }}</p>
+                    <div id="components_state">
+                        <div id="myList" class="cmp-list">
+                                {% for code, check in flight_session.flight.components_types_check().items() %}
+                                    {% if check %}
+                                        {#                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>#}
+                                        <div class="components"><p><ion-icon name="checkmark-circle" class="medium-icon" style="color:green"></ion-icon>{{ flight_session.flight.typecode2typename(code) }}</p></div>
+                                    {% else %}
+                                        {#                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>#}
+                                        <div class="components"><p><ion-icon name="close-circle" class="medium-icon" style="color:red"></ion-icon>{{ flight_session.flight.typecode2typename(code) }}</p></div>
+                                    {% endif %}
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </li>
             {% else %}
                 <p>No flight running</p>
@@ -43,8 +58,10 @@
     {# End of flash messages #}
 
     <div class="main_container">
+        <!-- block scripts -->
         {% block main %}
         {% endblock %}
     </div>
+    <script src="{{  url_for('static', filename='javascript/component_list.js') }}"></script>
 </body>
 </html>

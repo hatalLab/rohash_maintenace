@@ -1,6 +1,7 @@
-let list =document.getElementById('components_list');
-list.addEventListener('click',() =>{
-    document.getElementById('components_list').classList.toggle("show");
+let menu =document.getElementById('components_list');
+menu.addEventListener('click',() =>{
+    document.getElementById('myList').classList.toggle("show");
+    
 });
 
 /* function myFunction() {

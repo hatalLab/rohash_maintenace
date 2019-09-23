@@ -6,15 +6,27 @@ from qr_app import db
 class BasicModel():
 
     def add_to_db(self):
+
         db.session.add(self)
         try:
             db.session.commit()
-            print("Added flight No {} to db".format(self.id))
-        except:
+            print("Added {} to db".format(self))
+        except Exception as e:
             db.session.rollback()
+            print("[add_to_db] Error on {}:\n{}\nRollbacking\n ".format(self, str(e)))
             return False
         return True
 
+    @classmethod
+    def get_or_create(cls, primary_key, **kwargs):
+        """
+        Search for an object  that match the primary key, else, it will create it
+        :return:
+        """
+        obj = cls.query.get(kwargs[primary_key])
+        if not obj:
+            obj = cls(**kwargs)
+        return obj
 
 flights_to_components = db.Table('flights_to_comps',
                                  db.Column('flight_id', db.Integer, db.ForeignKey('flight.id'), primary_key=True),
@@ -80,6 +92,15 @@ class Flight(BasicModel, db.Model):
                 check_list[code] = False
         return check_list
 
+    def ready_to_go(self):
+        """
+        Return true if all the components are scanned
+        """
+        check_list = self.components_types_check()
+        if False in check_list.values():
+            return False
+        return True
+
     @staticmethod
     def typecode2typename(code):
         return Component.typecode2typename(code)
@@ -99,6 +120,20 @@ class Flight(BasicModel, db.Model):
     def human_end_time(self):
         return self.end_time.strftime("%d/%m/%y at %H:%M")
 
+    @property
+    def start_place(self):
+        c = self.start_coord
+        if not c:
+            return "Null"
+        return str(c)
+
+    @property
+    def end_place(self):
+        c = self.end_coord
+        if not c:
+            return "Null"
+        return str(c)
+
     @classmethod
     def terminate_flight(cls, id):
         flight = cls.query.get(id)
@@ -109,6 +144,8 @@ class Flight(BasicModel, db.Model):
         db.session.commit()
         return True
 
+    def __repr__(self):
+        return "Flight No°{}".format(self.id)
 
 class Soldier(BasicModel, db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -117,13 +154,32 @@ class Soldier(BasicModel, db.Model):
 
 
 class Coordinates(BasicModel, db.Model):
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     north = db.Column(db.Float)
     east    = db.Column(db.Float)
     name = db.Column(db.String(64))
 
-    def to_str(self):
-        return "{}_N:{}_E:{}".format(self.name, self.x, self.y)  # Change to east and north
+    def to_html_value(self):
+        return "Name:{}_N:{}_E:{}_".format(self.name,
+                                                                                  float(self.north),
+                                                                                  float(self.east))
+
+    def __repr__(self):
+        return "{} (N°{:.2f},E°{:.2f})".format(self.name, float(self.north), float(self.east))
+
+    def to_html_inner(self):
+        return self.__repr__()
+
+    @classmethod
+    def add_or_create(cls, **kwargs):
+        obj = cls.query.filter_by(north=kwargs['north'], east=kwargs['east']).first()
+
+        if not obj:
+            obj = cls(**kwargs)
+
+        return obj
+
 
 
 class Component(BasicModel, db.Model):

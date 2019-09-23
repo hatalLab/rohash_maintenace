@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e28298f2-e0c7-4df5-96ad-26032f4a1cd5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/populate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/864363ddfe63_.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/sessions.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/sessions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/static/css/aviStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/css/aviStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/static/javascript/component_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/javascript/component_list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/static/javascript/departure_waypoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/javascript/departure_waypoint.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/templates/base.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/base.jin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/templates/flight_details.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/flight_details.jin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/templates/new_flight.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/new_flight.jin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_app/templates/scan.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/scan.jin" afterDir="false" />
     </list>
@@ -20,6 +22,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,17 +43,17 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1910" />
-    <option name="y" value="-10" />
-    <option name="width" value="1788" />
-    <option name="height" value="960" />
-  </component>
   <component name="ProjectId" id="1Qv7YlBH70VWdwkloNNxgwksbFi" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="last_opened_file_path" value="C:/Work/dev institute/Courses/3python/Classes" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\tshl\projects\rohash" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -70,6 +79,9 @@
       <updated>1568538548945</updated>
       <workItem from="1568639274759" duration="2539000" />
       <workItem from="1568788520934" duration="7525000" />
+      <workItem from="1568876183572" duration="14556000" />
+      <workItem from="1569166864798" duration="50000" />
+      <workItem from="1569217604795" duration="3700000" />
     </task>
     <servers />
   </component>

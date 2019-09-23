@@ -2,10 +2,10 @@
 
 
 {% block main %}
-    <h1>Flight No°{{ flight.id }} ({{ flight.team_name }})</h1>
-    <p><b>Flight start:</b> {{ flight.human_start_time }}</p>
+    <h1>{{  flight }}</h1>
+    <p><b>Flight start:</b> {{ flight.human_start_time }} from {{ flight.start_place }}</p>
         {% if not flight.is_alive() %}
-    <p><b>Flight end:</b> {{ flight.human_end_time }}</p>
+    <p><b>Flight end:</b> {{ flight.human_end_time }} to {{ flight.end_place }} </p>
     <p><b>Total flight time:</b> {{ flight.human_flight_time }} </p>
     {% endif %}
     <p><b>{{ flight.components|length }} components:</b></p>

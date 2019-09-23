@@ -1,4 +1,5 @@
 import flask
+import re
 import base64
 import functools
 from qr_app import forms, models
@@ -43,23 +44,25 @@ def new_flight():
 
     if form.validate_on_submit():
         # Create soldiers
-        commander    = models.Soldier(id=form.soldier1.data, role="commander")
-        pilot                   = models.Soldier(id=form.soldier2.data, role="pilot")
+        commander    = models.Soldier.get_or_create(primary_key='id', id=form.soldier1.data, role="commander")
+        pilot                   = models.Soldier.get_or_create(primary_key='id', id=form.soldier2.data, role="pilot")
 
         # Create coordinates objects
         coords_data = form.coordinates.data
-        print('coords data:',coords_data)
-        coordinates = models.Coordinates(north=coords_data[0], east=coords_data[1])
-        db.session.add(coordinates)
-        db.session.commit()
+        parse = re.match(r"Name:(?P<name>.+)_N:(?P<north>.+)_E:(?P<east>.+)_", coords_data).groupdict()      # TODO : add this as a method of the model
+        coordinates = models.Coordinates.add_or_create(north=parse['north'], east=parse['east'], name=parse['name'])
+        coordinates.add_to_db()
+
 
         # Create the flight
         new_flight = models.Flight()
         new_flight.add_soldier(commander)
         new_flight.add_soldier(pilot)
-        new_flight.start_coords = coordinates
-
+        new_flight.start_coord = coordinates
         new_flight.add_to_db()
+
+        db.session.commit()
+        flask.flash("Added flight {}".format(new_flight))
         set_flight(new_flight.id)
         return flask.redirect(flask.url_for('scan', flight=new_flight))
 
@@ -71,6 +74,8 @@ def new_flight():
 @app.route('/scan')
 @flight_required
 def scan():
+    if flight_session.flight.ready_to_go():
+        return flask.redirect(flask.url_for("homepage"))
     return flask.render_template("scan.jin")
 
 @app.route('/qr-process/<component_id>')
@@ -125,9 +130,11 @@ def component_details(comp_id):
 @app.route('/set-flight/<int:flight_id>', methods=('POST', 'GET'))
 def set_flight(flight_id):
     callback = flask.request.args.get('callback', default=flask.url_for('homepage'), type=str)
+    if not flight_id:
+        return flask.redirect(callback)
     flight = models.Flight.query.get(flight_id)
     if not flight:
-        return redirect(callback)
+        return flask.redirect(callback)
     flight_session.set(flight)
     return flask.redirect(callback)
 
@@ -167,3 +174,4 @@ def on_qr_find_api(component_id):
         resp = {'success':True, "text": "Component No {} already exist in flight {}".format(comp.id, flight_session.flight_id)}
 
     return flask.jsonify(resp)
+

@@ -19,27 +19,28 @@
                 <form method="GET" novalidate action="{{ url_for('stop_flight',  flight_id=curr_flight.id, callback=url_for('homepage')) }}">
                     <input type="hidden" name="flight_id" value="{{ flight_session.flight_id }}">
                     <input type="hidden" name="callback" value="{{ url_for('homepage') }}">
-                    <input id="submit" name="submit" type="submit" value="Finish">
+{#                    <input id="submit" name="submit" type="submit" value="Finish">#}
+{#                    Deleted this because it should be automatic #}
                 </form>
             </div>
             <div class="answer_canvas">
                 <p class="answer"></p>
             </div>
         </div>
-        <div class="components_list" style="visible:hidden">
-            <p class=""drop_cmp_list"></p>
-            <div id="myList" class="dropdown-list">
-                {% for code, check in curr_flight.components_types_check().items() %}
-                    {% if check %}
-                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>
-                        <p>{{ curr_flight.typecode2typename(code) }}</p>
-                    {% else %}
-                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>
-                        <p>{{ curr_flight.typecode2typename(code) }}</p>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+{#        <div class="components_list" style="visible:hidden">#}
+{#            <p class="drop_cmp_list"></p>#}
+{#            <div id="myList" class="dropdown-list">#}
+{#                {% for code, check in curr_flight.components_types_check().items() %}#}
+{#                    {% if check %}#}
+{#                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>#}
+{#                        <p><ion-icon name="checkmark-circle" class="medium-icon" style="color:green"></ion-icon>{{ curr_flight.typecode2typename(code) }}</p>#}
+{#                    {% else %}#}
+{#                        <img src="{{ url_for('static', filename='images/green_checkmark.png' ) }}" width="20px" height="15px"/>#}
+{#                        <p><ion-icon name="close-circle" class="medium-icon" style="color:red"></ion-icon>{{ curr_flight.typecode2typename(code) }}</p>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div#}
 
         <script type="text/javascript">
 
@@ -82,7 +83,7 @@
 
 
         </script>
-        <script src="{{  url_for('static', filename='javascript/component_list.js' }}"
+        <script src="{{  url_for('static', filename='javascript/component_list.js') }}"
     </div>
 
     {% endwith %}

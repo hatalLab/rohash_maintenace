@@ -21,3 +21,7 @@ class FlightSession:
 
     def alive(self):
         return self.flight_id != None
+
+    @property
+    def flight(self):
+        return models.Flight.query.get(self.flight_id)

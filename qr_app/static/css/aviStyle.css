@@ -4,9 +4,10 @@
 	display: flex;
 	background-color: black;
 	color: white;
-	padding: 16px;
+	padding: 10px;
     font-size: 16px;
-    min-width: 261px;
+	min-width: 261px;
+	height:40px;
 	border: none;
 	cursor: pointer;
 	justify-content: space-between;
@@ -47,13 +48,13 @@
 	min-width: 255.667px;
 	padding: 0;
 	margin: 0;
-	
+
 }
 #addition{
 	display: flex;
     flex-direction: column;
 	margin:0;
-	
+
 }
 
 #newN:focus,#newE:focus{
@@ -101,13 +102,15 @@
 	padding: 0;
 }
 
-#addSymbol{
+#addSymbol, #addSymbol:hover{
 	margin-top: 10px;
+	cursor: pointer;
 }
 /* Change color of dropdown links on hover */
 
-#dropdown-choicesp:hover {
+#dropdown-locations p:hover {
 	background-color: blue;
+	cursor: pointer;
 }
 
 

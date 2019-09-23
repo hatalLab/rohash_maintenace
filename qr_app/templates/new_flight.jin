@@ -17,25 +17,25 @@
 
         <p>
             {{ form.coordinates.label }}
-            {{ form.coordinates(hidden="hidden") }}
+            {{ form.coordinates(hidden="hidden", id="selector") }}
 
             <div class="dropdown">
                 <button type="button" onclick="myFunction()" class="dropbtn">
-                <p id="selection"></p> &nbsp; &#9660
+                <p id="selection">Select:</p> &nbsp; &#9660
                 </button>
                 <div id="myDropdown" class="dropdown-content">
 
                 <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br>
 
+            <div id="addition">
+                <input type="text" placeholder="North" id="newN">
+                <input type="text" placeholder="East" id="newE">
+            </div>
+
             <div id="add-content">
                 <img id="addSymbol" src="{{ url_for('static', filename='images/addSymbol.png' ) }}" alt="add" width=30px
                      height=30px/>
                 <p id="Add">&nbsp;&nbsp; Add: </p>
-            </div>
-
-            <div id="addition">
-                <input type="text" placeholder="North" id="newN">
-                <input type="text" placeholder="East" id="newE">
             </div>
 
             <div id="dropdown-locations">
