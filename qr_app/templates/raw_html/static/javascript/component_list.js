@@ -1,6 +1,6 @@
-let menu =document.getElementById('drop_cmp_list');
+let menu =document.getElementById('components_list');
 menu.addEventListener('click',() =>{
-    document.getElementById('components_list').classList.toggle("show");
+    document.getElementById('myList').classList.toggle("show");
     
 });
 
