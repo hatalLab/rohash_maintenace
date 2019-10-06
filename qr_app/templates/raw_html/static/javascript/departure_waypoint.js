@@ -330,7 +330,7 @@ function handleClick (event) { //handle clicking on location list -choosing loca
     let {name,North,East}=extractIdDetails(id);
     $(".location").show(); //show all locations
     $("#selector").empty().append(`<option id="selected" value = "${id}" selected></option>`); //delete the previous selection and add the new selection as the selected one
-    $("#selection").html(`${name}` + "<br /> " + `(N:${North}, E:${East})`); //show the selected text on the button
+    $("#selection").html(`${name}` + "<br /> " + `(N°${North}, E°${East})`); //show the selected text on the button
     let temp = $("#" + $.escapeSelector(id)); //copy the selected locaation
     $("#" + $.escapeSelector(id)).remove(); //remove it
     $("#dropdown-locations").prepend(temp.get()[0].outerHTML); //add it as first item
@@ -343,6 +343,7 @@ function handleClick (event) { //handle clicking on location list -choosing loca
 function handleAddition(event) { //when clicking on add symbol
     titleCase();
     $("#validate").remove();
+    
     if ((activateAddSymbol()) === false) {
         if ($("#addition").is(":visible")) {
             let children = $("#addition").children().get().reverse();
@@ -366,7 +367,7 @@ function handleAddition(event) { //when clicking on add symbol
             $("#" + $.escapeSelector(details.id)).trigger('click')
         } else if (validate()) {
             let newId = `Name:${newName.value}_N:${northField.value}_E:${eastField.value}_`;
-            let newText = `${newName.value} <br> (N${northField.value}, E${eastField.value})`;
+            let newText = `${newName.value} <br> (N°${northField.value}, E°${eastField.value})`;
             $("#dropdown-locations").prepend(`<p id="${newId}" class="location">${newText}</p>`);
             myFunction(); //close the menu
             $(".location").show(); //show all locations
