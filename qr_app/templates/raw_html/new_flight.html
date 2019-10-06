@@ -36,20 +36,24 @@
         <label for="soldier2">Pilot id</label>
         <input id="soldier2" name="soldier2" type="text" value="">
     </p>
-<select hidden id="selector"></select>
-    <p class="departure-waypoint">
-        <label for="coordinates"> Departure waypoint: </label>
-        <div class="dropdown">
-                <button type="button" onclick="myFunction()" class="dropbtn"><div id="selection">Select:<!-- <p id="nameOfLocation"></p> -->
-               <!--  <p id="coordinates"></p> --></div> &nbsp;  &#9660</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br />
-                    <div id="addition"><input type="text" placeholder="North" id="newN">
-                        <input type="text" placeholder="East" id="newE"></div>
+    <select hidden id="selector"></select>
 
-                    <div id="add-content"><img id="addSymbol" src="static/images/addSymbol.png" alt="add" width=30px height=30px id="add-symbol" />
-                        <p id="Add">&nbsp;&nbsp; Add: </p></div>
-                        
+    <p class="departure-waypoint">
+    
+        <label for="coordinates"> Departure waypoint: </label>
+    
+        <div class="dropdown">
+            <button type="button" onclick="myFunction()" class="dropbtn">
+                <div id="selection">Select:
+                </div>  &#9660</button>
+            <div id="myDropdown" class="dropdown-content">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <br />
+    
+                <div id="add-content"><img id="addSymbol" src="static/images/addSymbol.png" alt="add" width=30px height=30px />
+                    <p id="Add">&nbsp;&nbsp; Add: </p>
+                </div>
+                <div id="gps-container"><img id="gps" src="static/images/gps1.png" alt="gps" width=40px height=40px /><p id="gps-location"></p> </div>
                    
                     <div id="dropdown-locations">
                             <p id="Name:About_N:1234_E:5678_" class="location">&nbsp;&nbsp; About</p>
@@ -62,7 +66,6 @@
                     </div>
                 </div>
             </div>
-        
             <br />
     </p>
        <p>
@@ -72,6 +75,15 @@
 </form>
 
 </div>
+
+<div id="departure-waypoint-container">
+        <div id="addition">
+                <input type="text" placeholder="Name" id="newName">
+                <input type="text" placeholder="North" id="newN">
+                <input type="text" placeholder="East" id="newE">
+                <p id="distance"></p>
+        </div>
+
 <script src="static/javascript/departure_waypoint.js"></script>
 </body>
 </html>
