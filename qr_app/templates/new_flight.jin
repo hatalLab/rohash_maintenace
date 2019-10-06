@@ -2,29 +2,54 @@
 
 
 {% block main %}
-<form method="post" action="" novalidate>
-    {{ form.hidden_tag() }}
+    <form method="post" action="" novalidate>
+        {{ form.hidden_tag() }}
 
-    <p>
-        {{ form.soldier1.label }}
-        {{ form.soldier1() }}
-    </p>
+        <p>
+            {{ form.soldier1.label }}
+            {{ form.soldier1() }}
+        </p>
 
-    <p>
-        {{ form.soldier2.label }}
-        {{ form.soldier2() }}
-    </p>
+        <p>
+            {{ form.soldier2.label }}
+            {{ form.soldier2() }}
+        </p>
 
-    <p>
-        {{ form.coordinates.label }}
-        {{ form.coordinates() }}
-    </p>
+        <p>
+            {{ form.coordinates.label }}
+            {{ form.coordinates(hidden="hidden", id="selector") }}
 
-    <p>
-        {{ form.submit() }}
-    </p>
+            <div class="dropdown">
+                <button type="button" onclick="myFunction()" class="dropbtn">
+                <p id="selection">Select:</p> &nbsp; &#9660
+                </button>
+                <div id="myDropdown" class="dropdown-content">
 
-</form>
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br>
+
+            <div id="addition">
+                <input type="text" placeholder="North" id="newN">
+                <input type="text" placeholder="East" id="newE">
+            </div>
+
+            <div id="add-content">
+                <img id="addSymbol" src="{{ url_for('static', filename='images/addSymbol.png' ) }}" alt="add" width=30px
+                     height=30px/>
+                <p id="Add">&nbsp;&nbsp; Add: </p>
+            </div>
+
+            <div id="dropdown-locations">
+                {% for choice in form.coordinates.choices %}
+                    <p class="location" id="{{ choice[0] }}">&nbsp;&nbsp; {{ choice[1] }}</p>
+                {% endfor %}
+            </div>
+
+        </div>
+        <p>
+            {{ form.submit() }}
+        </p>
+        <script src="{{ url_for('static', filename='javascript/departure_waypoint.js') }}"></script>
+        </p></p></form>
 {% endblock %}
 
 
@@ -33,5 +58,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% endblock %}

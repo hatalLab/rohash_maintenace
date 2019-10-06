@@ -1,15 +1,29 @@
 /* Dropdown Button */
 
 .dropbtn {
+	display: flex;
 	background-color: black;
 	color: white;
-	padding: 16px;
+	padding: 10px;
     font-size: 16px;
-    min-width: 262px;
+	min-width: 261px;
+	height:40px;
 	border: none;
 	cursor: pointer;
+	justify-content: space-between;
 }
 
+#selection{
+	margin: 0;
+}
+#selected-content{
+	margin: 0;
+}
+.departure-waypoint{
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+}
 
 /* The search field */
 
@@ -30,7 +44,22 @@
 	outline: 3px solid #ddd;
 }
 
+#newN,#newE{
+	min-width: 255.667px;
+	padding: 0;
+	margin: 0;
 
+}
+#addition{
+	display: flex;
+    flex-direction: column;
+	margin:0;
+
+}
+
+#newN:focus,#newE:focus{
+	outline: 3px solid #ddd;
+}
 /* The container <div> - needed to position the dropdown content */
 
 .dropdown {
@@ -53,18 +82,35 @@
 
 /* Links inside the dropdown */
 
-.dropdown-content a {
+.dropdown-content p,#add-content {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
 }
 
+#add-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 0;
+}
 
+#Add{
+	margin: 0;
+	margin-left: 20px;
+	padding: 0;
+}
+
+#addSymbol, #addSymbol:hover{
+	margin-top: 10px;
+	cursor: pointer;
+}
 /* Change color of dropdown links on hover */
 
-.dropdown-content a:hover {
-	background-color: #f1f1f1
+#dropdown-locations p:hover {
+	background-color: blue;
+	cursor: pointer;
 }
 
 
@@ -72,4 +118,8 @@
 
 .show {
 	display: block;
+}
+#N,#E{
+	margin: 0;
+	padding: 0;
 }

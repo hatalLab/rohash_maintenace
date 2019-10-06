@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e28298f2-e0c7-4df5-96ad-26032f4a1cd5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/populate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/sessions.py" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/sessions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/static/css/aviStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/css/aviStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/static/javascript/component_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/javascript/component_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/static/javascript/departure_waypoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/static/javascript/departure_waypoint.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/templates/base.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/base.jin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/templates/flight_details.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/flight_details.jin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/templates/new_flight.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/new_flight.jin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_app/templates/scan.jin" beforeDir="false" afterPath="$PROJECT_DIR$/qr_app/templates/scan.jin" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/rohash.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Qv7YlBH70VWdwkloNNxgwksbFi" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="C:/Work/dev institute/Courses/3python/Classes" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\tshl\projects\rohash" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e28298f2-e0c7-4df5-96ad-26032f4a1cd5" name="Default Changelist" comment="" />
+      <created>1568538548945</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568538548945</updated>
+      <workItem from="1568639274759" duration="2539000" />
+      <workItem from="1568788520934" duration="7525000" />
+      <workItem from="1568876183572" duration="14556000" />
+      <workItem from="1569166864798" duration="50000" />
+      <workItem from="1569217604795" duration="3700000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

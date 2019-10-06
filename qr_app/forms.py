@@ -4,17 +4,23 @@ import wtforms
 from wtforms import validators as val
 from sqlalchemy.inspection import inspect
 
-
-
 class NewFlight(flask_wtf.FlaskForm):
 
     soldier1        = wtforms.IntegerField("Commander id")
     soldier2        = wtforms.IntegerField("Pilot id")
-    coordinates     = wtforms.SelectField("Departure waypoint", choices=[])
+    coordinates     = wtforms.SelectField("Departure waypoint", choices=[
+        (c.to_html_value, c.to_html_inner) for c in models.Coordinates.query.all()
+    ])
     submit          = wtforms.SubmitField("Add flight")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.update_coordinates()
+
     def update_coordinates(self):
-        self.coordinates.choices = [((coord.x, coord.y), coord.to_str()) for coord in models.Coordinates.query.all()]
+        self.coordinates.choices = [
+            (c.to_html_value(), c.to_html_inner()) for c in models.Coordinates.query.all()
+        ]
 
 class EndFlight(flask_wtf.FlaskForm):
 

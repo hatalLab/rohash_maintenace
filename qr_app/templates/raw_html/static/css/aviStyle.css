@@ -127,6 +127,7 @@ flex-direction: row;
 }
 #dropdown-locations p:hover {
 	background-color:  #ddd;
+
 	cursor: pointer;
 }
 
