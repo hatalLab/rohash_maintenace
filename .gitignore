@@ -1,5 +1,3 @@
-.idea/
-
 migrations/
 database.db
 __pycache__
@@ -148,4 +146,7 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+<<<<<<< HEAD
 
+=======
+>>>>>>> 87de41cd3a956a7871208bd9b0aaf77f408edf1e
