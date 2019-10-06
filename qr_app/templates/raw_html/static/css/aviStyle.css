@@ -84,6 +84,7 @@ flex-direction: row;
 	width: 261px;
 	border: 1px solid #ddd;
 	z-index: 1;
+	padding-bottom: 10px;
 }
 
 

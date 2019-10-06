@@ -6,6 +6,7 @@ function myFunction() {
     $("#myInput, #newN,#newE, #newName").val(""); //delete the value of this fields
     $("#addition").hide(1); //hide newName north and east
     $("#gps-location").text(""); //delete near location
+    $("#gps").css("margin-top",'0px');
 }
 
 function filterFunction() { //filter search result
@@ -13,17 +14,21 @@ function filterFunction() { //filter search result
     $("#validate").remove();
     let input, filter, p, div, northCoordinate, eastCoordinate;
     input = document.getElementById("myInput");
-
-    if (input.value.indexOf("_") > -1) {
-        input.value = input.value.slice(0, input.value.length - 1);
-    } //delete "_" from the user input
-
     filter = input.value.toUpperCase();
     div = document.getElementById("dropdown-locations");
     p = div.getElementsByClassName("location");
     $("#newName").val(input.value); //copy the value of input field to new name field
     northCoordinate = northField.value; //value of north and east fields
     eastCoordinate = eastField.value;
+
+    if (input.value.indexOf("_") > -1) {
+        input.value = input.value.slice(0, input.value.length - 1);
+    } //delete "_" from the user input
+
+   if(input.value === '' && northCoordinate === '' && eastCoordinate === ''){
+       $(".location").show();
+   }
+   else{
     for (i = 0; i < p.length; i++) {
         let {
             name,
@@ -31,7 +36,7 @@ function filterFunction() { //filter search result
             East
         } = extractIdDetails(p[i].id);
 
-        if ((name.toUpperCase().indexOf(filter) > -1 && filter !== "" || East.indexOf(eastCoordinate) > -1 && North.indexOf(northCoordinate) > -1) && eastCoordinate && northCoordinate) {
+        if ((name.toUpperCase().indexOf(filter) > -1 && filter !== "") || ((East.indexOf(eastCoordinate) > -1 && North.indexOf(northCoordinate) > -1) && eastCoordinate && northCoordinate)) {
             p[i].style.display = "";
         } else {
             p[i].style.display = "none";
@@ -42,7 +47,7 @@ function filterFunction() { //filter search result
     if (northCoordinate && eastCoordinate)
         filterCoordinates();
 }
-
+}
 
 function filterCoordinates() { //this function search for nearby place
     let div, p, northCoordinate, eastCoordinate, interval;
@@ -336,6 +341,7 @@ function handleClick (event) { //handle clicking on location list -choosing loca
 
 //adding and choosing new location
 function handleAddition(event) { //when clicking on add symbol
+    titleCase();
     $("#validate").remove();
     if ((activateAddSymbol()) === false) {
         if ($("#addition").is(":visible")) {
