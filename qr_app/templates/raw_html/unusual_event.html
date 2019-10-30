@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <head>
+            <title dir="rtl">סורק ברקודים</title>
+            <div id="header-container"></div>
+            <link rel="stylesheet" href="static/css/style.css"/>
+            <link rel="stylesheet" href="static/css/component_style.css"/>
+            
+        <script type="text/javascript" src="static/javascript/instascan.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        </head>
+        
+        <body dir="auto">
+        
+            <div id="hih" class="navbar">
+                <img class="logo" src="static/images/hatal.jpg" style="width:100px;height:100px"; />
+                <ol>
+                    <a href="/new-flight"><li>Start flight</li></a>
+                    <a href="/end-flight"><li>End flight</li></a>
+                    <a href="/scan"><li>Scan component</li></a>
+                    <a href="/flights"><li>Flights</li></a>
+                    <a href="unusual_event.html"><li>Unusual Event</li></a>
+                    <div id="components_list" class="components_list">
+                        <p class="drop_cmp_list">Flight No12</p>
+                        <div id="components_state">
+                            <div id="myList" class="cmp-list">
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height= "15px" />
+                               <p>Right wing</p></div>
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height="15px" />
+                               <p>Small wing</p></div>
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height="15px" />
+                               <p>Tail</p></div>
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height="15px" />
+                               <p>Head</p></div>
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height="15px" />
+                               <p>Elastic</p></div>
+                               <div class="components"><img src="static/images/red_checkmark.png" width="20px" height="15px" />
+                               <p>Motor</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </ol>
+            </div>
+            <div id="unusual_event_container" lang="heb" dir="rtl" style="margin-right: 30px; margin-top: 30px;">
+                
+                <label for="comander_name" style="display: block;">שם מפקד צוות:</label>
+                <input type="text" name="comander_name" id="comander_name" required>
+                <label for="comander_id" style="display: block;">מספר אישי:</label>
+                <input type="text" name="comander_id" id="comander_id" required >
+
+                <button id="main_btn" type="button" onclick="handleClick('event_container')" >דו"ח אירוע חריג</button>
+               
+                <div id="event_container" style="display: none;">
+                        <div id="parts_report_container">
+                            <div id="parts_report">
+                            
+                            </div>
+                        </div>
+
+                        <div id="launch_data_container">
+                            <div id="launch_data">
+                            </div>
+                        </div>
+
+                        <div id="previous_faults_container">
+                                <div id="previous_faults" >
+                            
+                                </div>
+                        </div>
+
+                        <div id="event_description_container">
+                            <div id="event_description" >
+                            </div>
+                        </div>
+                 </div>
+               
+                 <button id="landing_btn" type="button" onclick="handleClick('landing_data_container')" >נתונים בזמן נחיתה</button>
+               
+                <div id="landing_data_container" style="display: none;">
+                    <div id="landing_data">
+                        <form method="post" action="" novalidate >
+               
+                            <p><b>נתונים בזמן נחיתה:</b></p>
+                                <label for="distance_landing" style="display: block;">מרחק נחיתה מ-<bdi lang="en" dir="ltr">RH</bdi> מתוכנן:</label>
+                                <input type="text" name="distance_landing" id="distance_landing">
+                                
+                                <p>גובה אבנים באיזור נחיתה:</p>
+                                <label><input type="radio" name="stones_height" value="fifteen"><b><u>עד 15 ס"מ</u></b> </label><br>
+                                <label><input type="radio" name="stones_height" value="fifteen_to_thirty">15-30 ס"מ </label><br>
+                                <label><input type="radio" name="stones_height" value="over_thirty">30 ס"מ ומעלה </label><br>
+
+                                <p>שיפוע השטח:</p>
+                                <label><input type="radio" name="slone" value="flat">מישורי </label><br>
+                                <label><input type="radio" name="slone" value="light_slope">שיפוע קל </label><br>
+                                <label><input type="radio" name="slone" value="sharp_slope">שיפוע חד </label><br>
+
+                                <p>המטוס נחת על:</p>
+                                <label><input type="radio" name="landing_surface" value="stone">סלע </label><br>
+                                <label><input type="radio" name="landing_surface" value="sand"><b><u>חול</u></b> </label><br>
+                                <label><input type="radio" name="landing_surface" value="flora"> צמחייה</label><br>
+                                <label><input type="radio" name="landing_surface" value="other"> אחר</label><br><!-- uf the user press on this tag we need to open input -->
+                                
+                                <p>דלת כרית אוויר:</p>
+                                <label><input type="radio" name="airbag_door" value="opened"><b><u>פתוחה</u></b> </label><br>
+                                <label><input type="radio" name="airbag_door" value="closed"> סגורה</label><br>
+
+                                <p>כרית אוויר:</p>
+                                <label><input type="radio" name="airbag" value="new">חדשה (עד 10 שימושים) </label><br>
+                                <label><input type="radio" name="airbag" value="old"><b><u>ישנה</u></b> </label><br>
+
+                                <p>פין דלת כרית אוויר:</p>
+                                <label><input type="radio" name="pin_airbag_door" value="inside"><b><u>בפנים</u></b> </label><br>
+                                <label><input type="radio" name="pin_airbag_door" value="outside">בחוץ </label><br>
+                        </form>
+                    </div>
+                
+                
+            
+            <script src="static/javascript/unusual_event.js"></script>
+    </body>
+</html>

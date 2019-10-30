@@ -7,6 +7,7 @@ function myFunction() {
     $("#addition").hide(1); //hide newName north and east
     $("#gps-location").text(""); //delete near location
     $("#gps").css("margin-top",'0px');
+    $(".location").show();
 }
 
 function filterFunction() { //filter search result
