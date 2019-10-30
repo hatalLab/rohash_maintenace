@@ -6,6 +6,8 @@ function myFunction() {
     $("#myInput, #newN,#newE, #newName").val(""); //delete the value of this fields
     $("#addition").hide(1); //hide newName north and east
     $("#gps-location").text(""); //delete near location
+    $("#gps").css("margin-top",'0px');
+    $(".location").show();
 }
 
 function filterFunction() { //filter search result
@@ -13,17 +15,21 @@ function filterFunction() { //filter search result
     $("#validate").remove();
     let input, filter, p, div, northCoordinate, eastCoordinate;
     input = document.getElementById("myInput");
-
-    if (input.value.indexOf("_") > -1) {
-        input.value = input.value.slice(0, input.value.length - 1);
-    } //delete "_" from the user input
-
     filter = input.value.toUpperCase();
     div = document.getElementById("dropdown-locations");
     p = div.getElementsByClassName("location");
     $("#newName").val(input.value); //copy the value of input field to new name field
     northCoordinate = northField.value; //value of north and east fields
     eastCoordinate = eastField.value;
+
+    if (input.value.indexOf("_") > -1) {
+        input.value = input.value.slice(0, input.value.length - 1);
+    } //delete "_" from the user input
+
+   if(input.value === '' && northCoordinate === '' && eastCoordinate === ''){
+       $(".location").show();
+   }
+   else{
     for (i = 0; i < p.length; i++) {
         let {
             name,
@@ -31,7 +37,7 @@ function filterFunction() { //filter search result
             East
         } = extractIdDetails(p[i].id);
 
-        if ((name.toUpperCase().indexOf(filter) > -1 && filter !== "" || East.indexOf(eastCoordinate) > -1 && North.indexOf(northCoordinate) > -1) && eastCoordinate && northCoordinate) {
+        if ((name.toUpperCase().indexOf(filter) > -1 && filter !== "") || ((East.indexOf(eastCoordinate) > -1 && North.indexOf(northCoordinate) > -1) && eastCoordinate && northCoordinate)) {
             p[i].style.display = "";
         } else {
             p[i].style.display = "none";
@@ -42,7 +48,7 @@ function filterFunction() { //filter search result
     if (northCoordinate && eastCoordinate)
         filterCoordinates();
 }
-
+}
 
 function filterCoordinates() { //this function search for nearby place
     let div, p, northCoordinate, eastCoordinate, interval;
@@ -325,7 +331,7 @@ function handleClick (event) { //handle clicking on location list -choosing loca
     let {name,North,East}=extractIdDetails(id);
     $(".location").show(); //show all locations
     $("#selector").empty().append(`<option id="selected" value = "${id}" selected></option>`); //delete the previous selection and add the new selection as the selected one
-    $("#selection").html(`${name}` + "<br /> " + `(N:${North}, E:${East})`); //show the selected text on the button
+    $("#selection").html(`${name}` + "<br /> " + `(N°${North}, E°${East})`); //show the selected text on the button
     let temp = $("#" + $.escapeSelector(id)); //copy the selected locaation
     $("#" + $.escapeSelector(id)).remove(); //remove it
     $("#dropdown-locations").prepend(temp.get()[0].outerHTML); //add it as first item
@@ -336,7 +342,9 @@ function handleClick (event) { //handle clicking on location list -choosing loca
 
 //adding and choosing new location
 function handleAddition(event) { //when clicking on add symbol
+    titleCase();
     $("#validate").remove();
+    
     if ((activateAddSymbol()) === false) {
         if ($("#addition").is(":visible")) {
             let children = $("#addition").children().get().reverse();
@@ -360,7 +368,7 @@ function handleAddition(event) { //when clicking on add symbol
             $("#" + $.escapeSelector(details.id)).trigger('click')
         } else if (validate()) {
             let newId = `Name:${newName.value}_N:${northField.value}_E:${eastField.value}_`;
-            let newText = `${newName.value} <br> (N${northField.value}, E${eastField.value})`;
+            let newText = `${newName.value} <br> (N°${northField.value}, E°${eastField.value})`;
             $("#dropdown-locations").prepend(`<p id="${newId}" class="location">${newText}</p>`);
             myFunction(); //close the menu
             $(".location").show(); //show all locations
